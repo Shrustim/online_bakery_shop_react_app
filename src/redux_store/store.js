@@ -1,8 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit'
-import checksiteSlice from './features/checksiteSlice'
+import checkIsLoginSlice from './features/checkIsLoginSlice'
 export const store = configureStore({
   reducer: {
-     isAdminSite:checksiteSlice,
+     isLogin:checkIsLoginSlice,
      // Add the generated reducer as a specific top-level slice
      // [pokemonApi.reducerPath]: pokemonApi.reducer,
      // [productApi.reducerPath]: productApi.reducer,
