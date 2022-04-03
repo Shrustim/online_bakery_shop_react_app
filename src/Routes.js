@@ -3,7 +3,10 @@ import { BrowserRouter as Router, Route, Routes ,Link } from 'react-router-dom';
 import { HOME, ABOUTUS, CONTACT } from "./constants/routes";
 import { useSelector, useDispatch } from 'react-redux'
 import { checkLogin } from './redux_store/features/checkIsLoginSlice';
-
+import { Layout, Menu, Breadcrumb } from 'antd';
+import {SearchOutlined, UserOutlined,ShoppingCartOutlined} from '@ant-design/icons';
+import logo from "./assets/images/logoo.jpg";
+const { Header, Content, Footer } = Layout;
 const Home = lazy(() => import('./pages/Home'));
 const AboutUs = lazy(() => import('./pages/AboutUs'));
 const Contact = lazy(() => import('./pages/Contact'));
@@ -14,12 +17,31 @@ const isLogin = useSelector((state) => state.isLogin)
  console.log("isLogin",isLogin);
   return (
     <Router>
-             <Link to={HOME} style={{padding: '50px'}}>Home</Link> 
-             <Link to={ABOUTUS} style={{padding: '50px'}}>About-us</Link>
-             <Link to={CONTACT} style={{padding: '50px'}}>Contact</Link>
+     <Layout className="layout">
+    <Header>
+      <div >
+      <img src={logo} className="logo" />
+      </div>
+      <div style={{float:"right"}}>
+      <Link to={HOME} className="header-titles">Home</Link> 
+             <Link to={ABOUTUS} className="header-titles" >Breads <span class="new"> NEW</span> </Link>
+             <Link to={CONTACT} className="header-titles" >Cookies</Link>
+             <Link to={CONTACT} className="header-titles" >Biscuits </Link>
+             <Link to={CONTACT} className="header-titles" >Snacks  </Link>
+             <Link to={CONTACT} className="header-titles" >Sweet goods   </Link>
+             <Link to={CONTACT} className="header-titles" ><SearchOutlined className="header-icon" /> </Link>
+              <Link to={CONTACT} className="header-titles" ><UserOutlined className="header-icon" /> </Link>
+               <Link to={CONTACT} className="header-titles" ><ShoppingCartOutlined className="header-icon "   /> </Link>
             
 
-        <Suspense fallback={<div>Loading...</div>}>
+      </div>
+     
+    </Header>
+    <Content style={{ padding: '0 50px' }}>
+      <Breadcrumb style={{ margin: '16px 0' }}>
+       </Breadcrumb>
+      <div className="site-layout-content">
+       <Suspense fallback={<div>Loading...</div>}>
                   <Routes>
                         <Route exact path={HOME} element={<Home/>}/>
                        <Route  path={ABOUTUS} element={<AboutUs/>}/>
@@ -27,10 +49,15 @@ const isLogin = useSelector((state) => state.isLogin)
                        
                   </Routes>
             </Suspense>
-       
+            </div>
+    </Content>
+    <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer>
+  </Layout>
 
-         
-       </Router>
+
+           
+       
+     </Router>
   );
          
 }
