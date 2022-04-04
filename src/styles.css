@@ -23,7 +23,7 @@
 }
 
 .header-titles{
-  padding: 15px 12px;
+  padding: 15px 16px;
       color: #0a0202;
     /* display: inline-block; */
     vertical-align: middle;
@@ -41,4 +41,14 @@
 .header-icon{
   font-weight: 700;
     font-size: 16px;
+}
+.header-span{
+  position: absolute;
+    font-size: 10px;
+    background: purple;
+    line-height: 1;
+    padding: 5px;
+    border-radius: 47%;
+    color: white;
+    top: 20px;
 }

@@ -3,17 +3,25 @@ import { BrowserRouter as Router, Route, Routes ,Link } from 'react-router-dom';
 import { HOME, ABOUTUS, CONTACT } from "./constants/routes";
 import { useSelector, useDispatch } from 'react-redux'
 import { checkLogin } from './redux_store/features/checkIsLoginSlice';
-import { Layout, Menu, Breadcrumb } from 'antd';
+import { Layout, Menu, Breadcrumb ,Dropdown} from 'antd';
 import {SearchOutlined, UserOutlined,ShoppingCartOutlined} from '@ant-design/icons';
 import logo from "./assets/images/logoo.jpg";
+import { DownOutlined } from '@ant-design/icons';
+import HeaderDropDown from "./components/HeaderDropdown";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {  faMagnifyingGlass ,faUser,faCartShopping} from '@fortawesome/free-solid-svg-icons'
+
+
 const { Header, Content, Footer } = Layout;
 const Home = lazy(() => import('./pages/Home'));
 const AboutUs = lazy(() => import('./pages/AboutUs'));
 const Contact = lazy(() => import('./pages/Contact'));
 
+
 function Routers() {
 const dispatch = useDispatch()
-const isLogin = useSelector((state) => state.isLogin)
+const isLogin = useSelector((state) => state.isLogin);
+const [categoryId,setCategoryId] = useState("0");
  console.log("isLogin",isLogin);
   return (
     <Router>
@@ -24,14 +32,46 @@ const isLogin = useSelector((state) => state.isLogin)
       </div>
       <div style={{float:"right"}}>
       <Link to={HOME} className="header-titles">Home</Link> 
-             <Link to={ABOUTUS} className="header-titles" >Breads <span class="new"> NEW</span> </Link>
-             <Link to={CONTACT} className="header-titles" >Cookies</Link>
-             <Link to={CONTACT} className="header-titles" >Biscuits </Link>
+      <Dropdown overlay={<HeaderDropDown categoryId={categoryId}  />}>
+      
+        <a className="ant-dropdown-link header-titles" onClick={(e) =>  { e.preventDefault();setCategoryId(1) }} onMouseOver={(e) =>  { setCategoryId(1) }} >
+        Breads <span className="header-span"> Best</span>
+        </a>
+      </Dropdown>
+      <Dropdown overlay={<HeaderDropDown categoryId={categoryId} />}>
+      
+      <a className="ant-dropdown-link header-titles" onClick={(e) =>  { e.preventDefault();setCategoryId(2) }} onMouseOver={(e) =>  { setCategoryId(2) }} >
+      Cookies
+      </a>
+    </Dropdown>
+    <Dropdown overlay={<HeaderDropDown categoryId={categoryId} />}>
+      
+      <a className="ant-dropdown-link header-titles" onClick={(e) =>  { e.preventDefault();setCategoryId(2) }} onMouseOver={(e) =>  { setCategoryId(2) }} >
+      Biscuits
+      </a>
+    </Dropdown>
+    <Dropdown overlay={<HeaderDropDown categoryId={categoryId} />}>
+      
+      <a className="ant-dropdown-link header-titles" onClick={(e) =>  { e.preventDefault();setCategoryId(2) }} onMouseOver={(e) =>  { setCategoryId(2) }} >
+      Snacks
+      </a>
+    </Dropdown>
+    <Dropdown overlay={<HeaderDropDown categoryId={categoryId} />}>
+      
+      <a className="ant-dropdown-link header-titles" onClick={(e) =>  { e.preventDefault();setCategoryId(2) }} onMouseOver={(e) =>  { setCategoryId(2) }} >
+      Sweet goods 
+      </a>
+    </Dropdown>
+
+    
+             {/* <Link to={ABOUTUS} className="header-titles" >Breads <span class="header-span"> Best</span> </Link>
+             <Link to={CONTACT} className="header-titles" >Cookies</Link> */}
+             {/* <Link to={CONTACT} className="header-titles" >Biscuits </Link>
              <Link to={CONTACT} className="header-titles" >Snacks  </Link>
-             <Link to={CONTACT} className="header-titles" >Sweet goods   </Link>
-             <Link to={CONTACT} className="header-titles" ><SearchOutlined className="header-icon" /> </Link>
-              <Link to={CONTACT} className="header-titles" ><UserOutlined className="header-icon" /> </Link>
-               <Link to={CONTACT} className="header-titles" ><ShoppingCartOutlined className="header-icon "   /> </Link>
+             <Link to={CONTACT} className="header-titles" >Sweet goods   </Link> */}
+             <Link to={CONTACT} className="header-titles" ><FontAwesomeIcon icon={faMagnifyingGlass} />  </Link>
+              <Link to={CONTACT} className="header-titles" ><FontAwesomeIcon icon={faUser} />   </Link>
+               <Link to={CONTACT} className="header-titles" ><FontAwesomeIcon icon={faCartShopping} /> <span className="header-span"> 0</span> </Link>
             
 
       </div>

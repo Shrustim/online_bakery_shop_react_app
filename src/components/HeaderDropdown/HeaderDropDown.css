@@ -1,0 +1,16 @@
+.HeaderDropDown{
+    box-shadow: rgb(167 163 163) 1px 1px 2px 1px !important;
+    width: 442px;
+    display: flex;
+}
+.HeaderDropDown > .firstdiv{
+    width: 50%;
+}
+.HeaderDropDown > .seconddiv{
+    width: 50%;
+}
+
+.HeaderDropDown > .seconddiv > img {
+    width: 200px;
+    height: 200px;
+}
