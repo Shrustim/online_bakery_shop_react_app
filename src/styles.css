@@ -1,3 +1,8 @@
+:root {
+  --mainColor: #5f2309;
+  
+}
+
 .site-layout-content {
   min-height: 280px;
   padding: 24px;
@@ -45,10 +50,37 @@
 .header-span{
   position: absolute;
     font-size: 10px;
-    background: purple;
+    background: var(--mainColor);
     line-height: 1;
     padding: 5px;
     border-radius: 47%;
     color: white;
     top: 20px;
+}
+
+/* media query for desktop */
+@media only screen and (min-width: 768px) {
+  .MobileHeader{
+    display: none;
+  }
+  .DesktopHeader{
+    display: block;
+  }
+  .StyleHeader{
+    padding: 0 50px !important;
+  }
+
+}
+
+/* media query for mobile */
+@media only screen and (max-width: 768px) {
+  .MobileHeader{
+    display: block;
+  }
+  .DesktopHeader{
+    display: none;
+  }
+  .StyleHeader{
+    padding: 0 20px !important;
+  }
 }

@@ -1,0 +1,52 @@
+.menuIcon{
+    font-size: 20px!important;
+    margin-top: 32px;
+}
+.logo-mobile-header{
+    height:68px;
+    width: 151px;
+}
+
+.main-mobile-head-block{
+    display: flex;
+    margin-right: 6px;
+}
+.mobile-header-span{
+    position: absolute;
+    font-size: 10px;
+    background: var(--mainColor);
+    line-height: 1;
+    padding: 5px;
+    border-radius: 47%;
+    color: white;
+    top: 20px;
+}
+.mobileHeaderIcon{
+    padding-left: 17px;
+    padding-right: 1px;
+}
+
+.drawerMenulist{
+    font-size: 15px;
+}
+.collapseMenuMobile > .ant-collapse-item > .ant-collapse-header{
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--mainColor) !important;
+}
+
+.ant-drawer-title {
+    color: var(--mainColor) !important;
+    font-weight: 700 !important;
+    font-style: italic;
+    text-align: center;
+    font-size: 24px !important;
+    
+}
+
+.subMenuMobile{
+    color: var(--mainColor) !important;
+}
+.ant-drawer-content-wrapper{
+    width: 332px !important;
+}
