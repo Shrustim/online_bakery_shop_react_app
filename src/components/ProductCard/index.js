@@ -5,12 +5,12 @@ import {  faPlus, faMinus} from '@fortawesome/free-solid-svg-icons'
 import "./ProductCard.css";
 const { Meta } = Card;
 const { Option } = Select;
-export default function ProductCard({imgg,loading,discount}) {
+export default function ProductCard({imgg,loading,discount,noPadding}) {
     function handleChange(value) {
         console.log(value); // { value: "lucy", key: "lucy", label: "Lucy (101)" }
       }
   return (
-    <div className='main-box-product'>
+    <div className='main-box-product' style={typeof noPadding != "undefined" ? {padding:"0px"} :null}>
           <Card
                 loading={loading}
                 hoverable

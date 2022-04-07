@@ -1,6 +1,6 @@
 import React, { Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Route, Routes  } from 'react-router-dom';
-import { HOME, ABOUTUS, CONTACT } from "./constants/routes";
+import { HOME, ABOUTUS, CONTACT, PRODUCTLIST, PRODUCTDETAIL } from "./constants/routes";
 import { useSelector, useDispatch } from 'react-redux'
 import { checkLogin } from './redux_store/features/checkIsLoginSlice';
 import { Layout } from 'antd';
@@ -11,7 +11,8 @@ const { Header, Content, Footer } = Layout;
 const Home = lazy(() => import('./pages/Home'));
 const AboutUs = lazy(() => import('./pages/AboutUs'));
 const Contact = lazy(() => import('./pages/Contact'));
-
+const ProductList = lazy(() => import('./pages/ProductList'));
+const ProductDetail = lazy(() => import("./pages/ProductDetail"));
 
 function Routers() {
 const dispatch = useDispatch()
@@ -37,8 +38,10 @@ const isLogin = useSelector((state) => state.isLogin);
                  <Suspense fallback={<div>Loading...</div>}>
                       <Routes>
                             <Route exact path={HOME} element={<Home/>}/>
-                          <Route  path={ABOUTUS} element={<AboutUs/>}/>
+                            <Route  path={ABOUTUS} element={<AboutUs/>}/>
                             <Route  path={CONTACT} element={<Contact/>}/>
+                            <Route path={PRODUCTLIST} element={<ProductList/>} /> 
+                            <Route path={PRODUCTDETAIL} element={<ProductDetail/>} /> 
                           
                       </Routes>
                   </Suspense>

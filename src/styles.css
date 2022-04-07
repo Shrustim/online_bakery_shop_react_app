@@ -88,6 +88,9 @@
   display: block!important;
 }
  
+.hideOnDesktop{
+  display: none;
+}
 }
 
 /* media query for mobile */
@@ -119,5 +122,8 @@
 }
 .hideOnMobile{
   display: none!important;
+}
+.hideOnDesktop{
+  display: block ;
 }
 }
