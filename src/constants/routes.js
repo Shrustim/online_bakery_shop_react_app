@@ -4,3 +4,4 @@ export const  CONTACT  = "/contact-us";
 export const  ADMIN  = "/admin";
 export const PRODUCTLIST = "/productlist";
 export const PRODUCTDETAIL = "/ProductDetail";
+export const CART = "/cart";

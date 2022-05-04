@@ -1,6 +1,6 @@
 import React, { Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Route, Routes  } from 'react-router-dom';
-import { HOME, ABOUTUS, CONTACT, PRODUCTLIST, PRODUCTDETAIL } from "./constants/routes";
+import { HOME, ABOUTUS, CONTACT, PRODUCTLIST, PRODUCTDETAIL, CART } from "./constants/routes";
 import { useSelector, useDispatch } from 'react-redux'
 import { checkLogin } from './redux_store/features/checkIsLoginSlice';
 import { Layout } from 'antd';
@@ -13,6 +13,7 @@ const AboutUs = lazy(() => import('./pages/AboutUs'));
 const Contact = lazy(() => import('./pages/Contact'));
 const ProductList = lazy(() => import('./pages/ProductList'));
 const ProductDetail = lazy(() => import("./pages/ProductDetail"));
+const Cart = lazy(() => import('./pages/Cart'));
 
 function Routers() {
 const dispatch = useDispatch()
@@ -42,6 +43,7 @@ const isLogin = useSelector((state) => state.isLogin);
                             <Route  path={CONTACT} element={<Contact/>}/>
                             <Route path={PRODUCTLIST} element={<ProductList/>} /> 
                             <Route path={PRODUCTDETAIL} element={<ProductDetail/>} /> 
+                            <Route path={CART} element={<Cart/>} /> 
                           
                       </Routes>
                   </Suspense>

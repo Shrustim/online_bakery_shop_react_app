@@ -1,0 +1,74 @@
+.sideImage-detail{
+    width: 100px;
+    height: 100px;
+    margin-bottom: 10px;
+    border: 1px solid #d3cece;
+}
+.mainImage-detail{
+    width: 430px;
+    height: 430px;
+    margin-bottom: 10px;
+    border: 1px solid #d3cece;
+}
+.detail-mainprice{
+    padding-right: 10px;
+    font-size: 22px;
+    font-weight: 700;
+}
+.mainruperss{
+    font-size: 23px;
+    font-weight: 700;
+    padding-right: 10px;
+}
+
+.mrpruperss{
+    text-decoration: line-through;
+    color: #686a6c;
+    padding-right: 10px;
+}
+
+.discountt{
+    font-weight: 700;
+    font-size: 17px;
+    color: var(--mainColor);
+}
+.middle-button-pro-detail {
+    padding-left: 9px;
+    padding-right: 9px;
+}
+
+.addToCartButton-detail {
+    margin-top: 3px;
+    height: 34px;
+    background: var(--mainColor) !important;
+    border-color: var(--mainColor) !important;
+    width: 123px;
+    font-size: 15px;
+}
+
+
+
+.PlusButton {
+    width: 23px;
+    height: 23px;
+    border-color: var(--mainColor) !important;
+    background: white;
+    padding: 2.4px 0;
+    color: var(--mainColor) !important;
+    font-size: 10px;
+}
+.MinusButton {
+    width: 23px;
+    height: 23px;
+    border-color: var(--mainColor) !important;
+    background: white;
+    padding: 2.4px 0;
+    color: var(--mainColor) !important;
+    font-size: 10px;
+}
+
+.buttonbox-detail{
+    float: left;
+    width: 100%;
+    padding-bottom: 27px;
+}

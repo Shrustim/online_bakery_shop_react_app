@@ -1,6 +1,6 @@
 import React,{useState} from 'react';
 import { Link } from 'react-router-dom';
-import { HOME,  CONTACT, PRODUCTLIST,PRODUCTDETAIL } from "../../constants/routes";
+import { HOME,  CONTACT, PRODUCTLIST,PRODUCTDETAIL, CART } from "../../constants/routes";
 import { Dropdown} from 'antd';
 import logo from "../../assets/images/logoo.jpg";
 import HeaderDropDown from "../HeaderDropdown";
@@ -56,7 +56,7 @@ export default function DesktopHeader() {
              <Link to={CONTACT} className="header-titles" >Sweet goods   </Link> */}
                <Link to={CONTACT} className="header-titles" ><FontAwesomeIcon icon={faMagnifyingGlass} />  </Link>
                <Link to={PRODUCTLIST} className="header-titles" ><FontAwesomeIcon icon={faCartShopping} /> <span className="header-span"> 0</span> </Link>
-               <Link to={PRODUCTDETAIL} className="header-titles" > <FontAwesomeIcon icon={faHeart} /> <span className="header-span"> 0</span> </Link>
+               <Link to={CART} className="header-titles" > <FontAwesomeIcon icon={faHeart} /> <span className="header-span"> 0</span> </Link>
             
       <Dropdown overlay={<HeaderDropDown categoryId="0" />}>
       
