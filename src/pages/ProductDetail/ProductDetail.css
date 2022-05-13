@@ -1,12 +1,12 @@
 .sideImage-detail{
-    width: 100px;
-    height: 100px;
+    width: 100%;
+    height: 95px;
     margin-bottom: 10px;
     border: 1px solid #d3cece;
 }
 .mainImage-detail{
-    width: 430px;
-    height: 430px;
+    width: 100%;
+    height: 410px;
     margin-bottom: 10px;
     border: 1px solid #d3cece;
 }

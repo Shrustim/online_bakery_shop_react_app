@@ -5,3 +5,6 @@ export const  ADMIN  = "/admin";
 export const PRODUCTLIST = "/productlist";
 export const PRODUCTDETAIL = "/ProductDetail";
 export const CART = "/cart";
+export const LOGIN = "/login";
+export const REGISTER = "/register";
+export const CHECKOUT = "/checkout";

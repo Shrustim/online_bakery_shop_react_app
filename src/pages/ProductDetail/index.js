@@ -16,7 +16,6 @@ export default function ProductDetail() {
     <Row>
                
                 <Col  lg={{ span: 11 }} md={{span:11}} sm={{span:24}} xs={{span:24}} >
-                  <div>
                    <Row>
                       <Col  lg={{ span: 5 }} md={{span:5}} >
                       <img className='sideImage-detail' src="https://cdn.shopify.com/s/files/1/0024/1152/8253/products/img-cake-5_0ec79749-007d-466c-80b5-70220bc8febe_grande.jpg?v=1524991521" /> <br/>
@@ -28,7 +27,6 @@ export default function ProductDetail() {
                       <img className='mainImage-detail' src="https://cdn.shopify.com/s/files/1/0024/1152/8253/products/img-cake-5_0ec79749-007d-466c-80b5-70220bc8febe_grande.jpg?v=1524991521" /> <br/>
                       </Col>
                    </Row>
-                  </div>
                 </Col>
                 <Col lg={{ span: 13 }} md={{span:13}} sm={{span:24}} xs={{span:24}} >
                  <div style={{padding:"10px",paddingTop:"0px"}}>

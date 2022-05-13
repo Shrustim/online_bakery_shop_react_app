@@ -1,0 +1,34 @@
+#components-form-demo-normal-login .login-form {
+    max-width: 300px;
+  }
+  #components-form-demo-normal-login .login-form-forgot {
+    float: right;
+  }
+  #components-form-demo-normal-login .ant-col-rtl .login-form-forgot {
+    float: left;
+  }
+  #components-form-demo-normal-login .login-form-button {
+    width: 100%;
+  }
+
+  .Checkout-Box{
+    margin: 12px;
+    box-shadow: 1px 2px 5px 3px #bfb4b4;
+    padding: 15px;
+    border-radius: 10px;
+    height: auto;
+    padding-top: 32px;
+  }
+  .checkout-rs-tag{
+    float: right;
+  }
+
+  .checkout-btn{
+    margin-top: 3px;
+    height: 38px;
+    background: var(--mainColor) !important;
+    border-color: var(--mainColor) !important;
+    width: 137px;
+
+    font-size: 16px;
+  }

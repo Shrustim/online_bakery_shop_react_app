@@ -1,6 +1,6 @@
 import React, { Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Route, Routes  } from 'react-router-dom';
-import { HOME, ABOUTUS, CONTACT, PRODUCTLIST, PRODUCTDETAIL, CART } from "./constants/routes";
+import { HOME, ABOUTUS, CONTACT, PRODUCTLIST, PRODUCTDETAIL, CART, LOGIN, REGISTER, CHECKOUT } from "./constants/routes";
 import { useSelector, useDispatch } from 'react-redux'
 import { checkLogin } from './redux_store/features/checkIsLoginSlice';
 import { Layout } from 'antd';
@@ -14,6 +14,10 @@ const Contact = lazy(() => import('./pages/Contact'));
 const ProductList = lazy(() => import('./pages/ProductList'));
 const ProductDetail = lazy(() => import("./pages/ProductDetail"));
 const Cart = lazy(() => import('./pages/Cart'));
+const Login = lazy(() => import('./pages/Login'));
+const Register = lazy(() => import('./pages/Register'));
+const Checkout = lazy(() => import('./pages/Checkout'));
+const CSVData = lazy(() => import('./components/CSVDownload'));
 
 function Routers() {
 const dispatch = useDispatch()
@@ -44,7 +48,10 @@ const isLogin = useSelector((state) => state.isLogin);
                             <Route path={PRODUCTLIST} element={<ProductList/>} /> 
                             <Route path={PRODUCTDETAIL} element={<ProductDetail/>} /> 
                             <Route path={CART} element={<Cart/>} /> 
-                          
+                            <Route path={LOGIN} element={<Login/>} /> 
+                            <Route path={REGISTER} element={<Register/>} /> 
+                            <Route path={CHECKOUT} element={<Checkout/>} /> 
+                            <Route path={"csv"} element={<CSVData/>} />
                       </Routes>
                   </Suspense>
                 </div>
