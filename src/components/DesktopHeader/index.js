@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{useState,useEffect} from 'react';
 import { Link } from 'react-router-dom';
 import { HOME,  CONTACT, PRODUCTLIST,PRODUCTDETAIL, CART } from "../../constants/routes";
 import { Dropdown} from 'antd';
@@ -7,46 +7,45 @@ import HeaderDropDown from "../HeaderDropdown";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {  faMagnifyingGlass ,faUser,faCartShopping, faHeart} from '@fortawesome/free-solid-svg-icons'
 import "./DesktopHeader.css";
+import api from "../../helpers/axios";
 
 export default function DesktopHeader() {
-    const [categoryId,setCategoryId] = useState("0");
+  const [category,setCategory] = useState([]);
+  const [categoryId,setCategoryId] = useState("0");
+  useEffect(()=>{
+    fetchCategory();
+  },[]);
+  const fetchCategory = async () => {
+    const result = await api.get('/categories?filter=%7B%22limit%22%3A%205%2C%22where%22%3A%20%7B%22is_active%22%3A%201%7D%2C%22fields%22%3A%20%7B%22id%22%3A%20true%2C%22categoryName%22%3A%20true%2C%22image%22%3A%20true%2C%22description%22%3A%20true%7D%7D');
+    setCategory(result.data);
+   }
   return (
    <>
      <div >
       <img src={logo} className="logo" />
       </div>
       <div style={{float:"right"}}>
-      <Link to={HOME} className="header-titles">Home</Link> 
-      <Dropdown overlay={<HeaderDropDown categoryId={categoryId}  />}>
+      <Link to={HOME} className="header-titles">Home</Link>
+
+      {
+        category.length > 0 ?
+        category.map((elm,index) => {
+           return(
+            <Dropdown overlay={<HeaderDropDown categoryId={categoryId}  />} key={elm.id}>
       
-        <a className="ant-dropdown-link header-titles" onClick={(e) =>  { e.preventDefault();setCategoryId(1) }} onMouseOver={(e) =>  { setCategoryId(1) }} >
-        Breads <span className="header-span"> Best</span>
-        </a>
-      </Dropdown>
-      <Dropdown overlay={<HeaderDropDown categoryId={categoryId} />}>
-      
-      <a className="ant-dropdown-link header-titles" onClick={(e) =>  { e.preventDefault();setCategoryId(2) }} onMouseOver={(e) =>  { setCategoryId(2) }} >
-      Cookies
-      </a>
-    </Dropdown>
-    <Dropdown overlay={<HeaderDropDown categoryId={categoryId} />}>
-      
-      <a className="ant-dropdown-link header-titles" onClick={(e) =>  { e.preventDefault();setCategoryId(2) }} onMouseOver={(e) =>  { setCategoryId(2) }} >
-      Biscuits
-      </a>
-    </Dropdown>
-    <Dropdown overlay={<HeaderDropDown categoryId={categoryId} />}>
-      
-      <a className="ant-dropdown-link header-titles" onClick={(e) =>  { e.preventDefault();setCategoryId(2) }} onMouseOver={(e) =>  { setCategoryId(2) }} >
-      Snacks
-      </a>
-    </Dropdown>
-    <Dropdown overlay={<HeaderDropDown categoryId={categoryId} />}>
-      
-      <a className="ant-dropdown-link header-titles" onClick={(e) =>  { e.preventDefault();setCategoryId(2) }} onMouseOver={(e) =>  { setCategoryId(2) }} >
-      Sweet goods 
-      </a>
-    </Dropdown>
+            <a className="ant-dropdown-link header-titles" onClick={(e) =>  { e.preventDefault();setCategoryId(elm.id) }} onMouseOver={(e) =>  { setCategoryId(elm.id) }} >
+            {elm.categoryName} 
+            {
+             index === 0 || index === 2 ?  <span className="header-span"> Best</span> : null
+            }
+            </a>
+          </Dropdown>
+           )
+        })
+        : null
+      }  
+
+
 
     
              {/* <Link to={ABOUTUS} className="header-titles" >Breads <span class="header-span"> Best</span> </Link>

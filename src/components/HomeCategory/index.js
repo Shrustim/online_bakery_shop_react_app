@@ -12,14 +12,14 @@ export default function HomeCategory({imagge,categoryName}) {
                         </div>
                  </center>   
                  <div className='category-desktop-home'>
-                                <p>
+                                
                                     <ul className='home-ul-category'>
                                     <li> <FontAwesomeIcon icon={faCaretRight} /> Crackers</li>
                                     <li> <FontAwesomeIcon icon={faCaretRight} /> Hard sweet</li>
                                     <li> <FontAwesomeIcon icon={faCaretRight} />  Semi-sweet biscuits</li>
                                     <li> <FontAwesomeIcon icon={faCaretRight} />  Short-dough biscuits</li>
                                     </ul>
-                                </p>
+                                
                             </div> 
     </>
   )

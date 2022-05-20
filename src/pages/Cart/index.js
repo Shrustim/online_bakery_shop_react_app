@@ -3,8 +3,13 @@ import { Row, Col ,Button  } from 'antd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {  faCartShopping} from '@fortawesome/free-solid-svg-icons'
 import ProductCart from "../../components/ProductCart";
+import { useSelector ,useDispatch } from "react-redux";
 import "./Cart.css";
 export default function Cart() {
+  
+  const cartData = useSelector((state) => state.cart);
+  console.log(cartData);
+ 
   return (
     <div>
          <Row>
@@ -14,12 +19,21 @@ export default function Cart() {
 
                        
                       <div className='cart-boxx'>
-                      <h2>My Cart (1)</h2>
-                            <ProductCart/>
-                            <hr className='cart-hr' />  
-                            <ProductCart/>
+                      <h2>My Cart ({cartData.cart.length})</h2>
+                      {
+                        cartData.cart.length > 0 ?
+                          cartData.cart.map((curElem)=>{
+                           return(
+                             <div key={curElem.id}>
+                             <ProductCart data={curElem} />
+                             <hr className='cart-hr' />  
+                             </div>
+                           )
+                          })
+                        : <><h2>Your cart is empty</h2></>
+                        }
                           
-                            <hr className='cart-hr' />  
+                          
                       <div>
 
                         <Button type="primary" size="small" className='placeorderButton'> <FontAwesomeIcon style={{marginRight:"10px"}} icon={faCartShopping} /> Place Order</Button>
@@ -32,11 +46,11 @@ export default function Cart() {
                
                 <div className='cart-boxx' style={{width: "100%",height: "346px"}}>
                 <h2>PRICE DETAILS</h2><br/>
-                <h4 className='cart-rs-tag'>Price  <span>₹1598</span></h4>
-                <h4 className='cart-rs-tag'>Qty  <span>2</span></h4>
+                <h4 className='cart-rs-tag'>Price  <span>₹{cartData.total}</span></h4>
+                <h4 className='cart-rs-tag'>Qty  <span>{cartData.cart.length}</span></h4>
                 <h4 className='cart-rs-tag'>Discount <span style={{color:"green"}}>- ₹1598</span></h4>
                 <h4 className='cart-rs-tag'>Delivery Charges  <span>₹40</span></h4>
-                <h2 className='cart-rs-tag' style={{fontSize:"20px"}}>Total Amount <span>₹4895</span></h2>
+                <h2 className='cart-rs-tag' style={{fontSize:"20px"}}>Total Amount <span>₹{cartData.total}</span></h2>
                 </div>
                
                </Col>

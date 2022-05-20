@@ -1,10 +1,59 @@
+import React,{useState,useEffect} from 'react'
 import ProductCard from "../../components/ProductCard"
 import HomeCategory from "../../components/HomeCategory";
 import { Carousel,Row, Col, Divider  } from 'antd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {  faFlaskVial,faCheckToSlot,  faHeartCircleCheck,faCaretRight,faStar} from '@fortawesome/free-solid-svg-icons'
 import "./Home.css";
+import api from "../../helpers/axios";
+const elment= {
+    "id": 1,
+    "productName": "White Bread",
+    "categoryId": 1,
+    "description": "Start your day on a nourishing and delightful note with this delicious blend of taste and nutrition White Bread is basically made from wheat flour from which the brand and germ",
+    "imageone": "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcSNYt2pdTDIAN1Q8PDQUXBLdQPeAEKjAmT5GCE0X-HzfiEBwZAZ4R2TYZHTHBx0z_tSZSWaJktMCBMOy1q_4PhwkmqA6LBoyARpqpTr1ofqOp4vUA5Oh10IpsA&usqp=CAE",
+    "imagetwo": "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcSNYt2pdTDIAN1Q8PDQUXBLdQPeAEKjAmT5GCE0X-HzfiEBwZAZ4R2TYZHTHBx0z_tSZSWaJktMCBMOy1q_4PhwkmqA6LBoyARpqpTr1ofqOp4vUA5Oh10IpsA&usqp=CAE",
+    "imagethree": "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcSNYt2pdTDIAN1Q8PDQUXBLdQPeAEKjAmT5GCE0X-HzfiEBwZAZ4R2TYZHTHBx0z_tSZSWaJktMCBMOy1q_4PhwkmqA6LBoyARpqpTr1ofqOp4vUA5Oh10IpsA&usqp=CAE",
+    "imagefour": "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcSNYt2pdTDIAN1Q8PDQUXBLdQPeAEKjAmT5GCE0X-HzfiEBwZAZ4R2TYZHTHBx0z_tSZSWaJktMCBMOy1q_4PhwkmqA6LBoyARpqpTr1ofqOp4vUA5Oh10IpsA&usqp=CAE",
+    "pricedata": [
+      {
+        "id": 1,
+        "productId": 1,
+        "unitId": 2,
+        "qty": 350,
+        "price": 25,
+        "discount": 0,
+        "totalPrice": 25
+      },
+      {
+        "id": 2,
+        "productId": 1,
+        "unitId": 2,
+        "qty": 700,
+        "price": 50,
+        "discount": 0,
+        "totalPrice": 50
+      }
+    ]
+  };
 const Home = () => {
+    const [productListOne,setProductListOne] = useState([]);
+    const [productListTwo,setProductListTwo] = useState([]);
+    useEffect(()=>{
+        fetchProductListOne();
+        fetchProductListtwo();
+    },[]);
+    const fetchProductListOne = async () => {
+        const result = await api.get('products-list?filter=%7B%22offset%22%3A%200%2C%22limit%22%3A%206%2C%22where%22%3A%20%7B%22is_active%22%3A%201%7D%2C%22fields%22%3A%20%7B%22id%22%3A%20true%2C%22productName%22%3A%20true%2C%22categoryId%22%3A%20true%2C%22description%22%3A%20true%2C%22imageone%22%3A%20true%2C%22imagetwo%22%3A%20true%2C%20%20%22imagethree%22%3A%20true%2C%22imagefour%22%3A%20true%7D%7D');
+        setProductListOne(result.data);
+        // console.log("productListOne----",result.data);
+    }
+    const fetchProductListtwo = async () => {
+        const result = await api.get('products-list?filter=%7B%22offset%22%3A%206%2C%22limit%22%3A%206%2C%22where%22%3A%20%7B%22is_active%22%3A%201%7D%2C%22fields%22%3A%20%7B%22id%22%3A%20true%2C%22productName%22%3A%20true%2C%22categoryId%22%3A%20true%2C%22description%22%3A%20true%2C%22imageone%22%3A%20true%2C%22imagetwo%22%3A%20true%2C%20%20%22imagethree%22%3A%20true%2C%22imagefour%22%3A%20true%7D%7D');
+        setProductListTwo(result.data);
+        // console.log("setProductListTwo----",result.data);
+    }
+    //   console.log(productListOne)
 	return(
          <div>
               <div className='section-home' style={{paddingTop:"0px"}}>
@@ -60,23 +109,30 @@ const Home = () => {
          <Divider className='heading-home-divider'><h2 className='heading-home'><b><FontAwesomeIcon icon={faStar} className="heading-star" /><FontAwesomeIcon icon={faStar} className="heading-star" /><FontAwesomeIcon icon={faStar} className="heading-star" /> Trending Products <FontAwesomeIcon icon={faStar} className="heading-star" /><FontAwesomeIcon icon={faStar} className="heading-star" /><FontAwesomeIcon icon={faStar} className="heading-star" /> </b> </h2></Divider>
            
             <Row>
-                <Col xs={{ span: 12}} sm={{ span: 12}} md={{ span: 8}} lg={{ span: 4 }}>
-                       <ProductCard discount={true} loading={false} imgg="https://rukminim2.flixcart.com/image/416/416/kmkxbww0/cookie-biscuit/z/x/9/200-handmade-sugar-free-low-fat-khari-biscuit-twistie-pack-of-1-original-imagfghhp7pdbdnp.jpeg?q=70" />
-                </Col>
-                <Col xs={{ span: 12}} sm={{ span: 12}} md={{ span: 8}} lg={{ span: 4 }}>
+                {productListOne.length > 0 ?
+                  productListOne.map((elm,index)=> {
+                   return(  
+                     <Col xs={{ span: 12}} sm={{ span: 12}} md={{ span: 8}} lg={{ span: 4 }} key={elm.id}>
+                        <ProductCard productData={elm} discount={true} loading={false} imgg="https://rukminim2.flixcart.com/image/416/416/kmkxbww0/cookie-biscuit/z/x/9/200-handmade-sugar-free-low-fat-khari-biscuit-twistie-pack-of-1-original-imagfghhp7pdbdnp.jpeg?q=70" />
+                    </Col>
+                   )
+                  })               
+                 :null}
+                
+                {/* <Col xs={{ span: 12}} sm={{ span: 12}} md={{ span: 8}} lg={{ span: 4 }}>
                        <ProductCard  discount={false} loading={false} imgg="https://cdn.shopify.com/s/files/1/0024/1152/8253/products/img-cake-5_0ec79749-007d-466c-80b5-70220bc8febe_grande.jpg?v=1524991521" />
                 </Col>
                 <Col xs={{ span: 12 }} sm={{ span: 12}} md={{ span: 8}} lg={{ span: 4 }}>
                        <ProductCard discount={true} loading={false} imgg="https://rukminim2.flixcart.com/image/416/416/kjom6q80-0/cookie-biscuit/h/m/m/250-premium-raggi-cookies-250-gm-1-akd-original-imafz73d9mzpn7h9.jpeg?q=70" />
+                </Col> */}
+                <Col xs={{ span: 12 }} sm={{ span: 12}} md={{ span: 8}} lg={{ span: 4 }}>
+                       <ProductCard  productData={elment} discount={false} loading={false} imgg="https://rukminim2.flixcart.com/image/416/416/km82d8w0/rusk/u/c/f/500-old-delhi-s-famous-fresh-crispy-soft-egg-cake-rusks-cake-original-imagf6knhnx45y9e.jpeg?q=70" />
                 </Col>
                 <Col xs={{ span: 12 }} sm={{ span: 12}} md={{ span: 8}} lg={{ span: 4 }}>
-                       <ProductCard  discount={false} loading={false} imgg="https://rukminim2.flixcart.com/image/416/416/km82d8w0/rusk/u/c/f/500-old-delhi-s-famous-fresh-crispy-soft-egg-cake-rusks-cake-original-imagf6knhnx45y9e.jpeg?q=70" />
+                       <ProductCard productData={elment}  discount={false} loading={false} imgg="https://m.media-amazon.com/images/I/91aVePdCaDL._SX569_.jpg" />
                 </Col>
                 <Col xs={{ span: 12 }} sm={{ span: 12}} md={{ span: 8}} lg={{ span: 4 }}>
-                       <ProductCard   discount={false} loading={false} imgg="https://m.media-amazon.com/images/I/91aVePdCaDL._SX569_.jpg" />
-                </Col>
-                <Col xs={{ span: 12 }} sm={{ span: 12}} md={{ span: 8}} lg={{ span: 4 }}>
-                       <ProductCard discount={false} loading={false} imgg="https://www.bigbasket.com/media/uploads/p/l/40106021_10-tasties-biscuits-moon.jpg" /> 
+                       <ProductCard productData={elment} discount={false} loading={false} imgg="https://www.bigbasket.com/media/uploads/p/l/40106021_10-tasties-biscuits-moon.jpg" /> 
                 </Col>
             </Row>
          </div>
@@ -111,22 +167,22 @@ const Home = () => {
            
             <Row>
                 <Col xs={{ span: 12}} sm={{ span: 12}} md={{ span: 8}} lg={{ span: 4 }}>
-                       <ProductCard discount={true} loading={false} imgg="https://rukminim2.flixcart.com/image/416/416/kmkxbww0/cookie-biscuit/z/x/9/200-handmade-sugar-free-low-fat-khari-biscuit-twistie-pack-of-1-original-imagfghhp7pdbdnp.jpeg?q=70" />
+                       <ProductCard productData={elment} discount={true} loading={false} imgg="https://rukminim2.flixcart.com/image/416/416/kmkxbww0/cookie-biscuit/z/x/9/200-handmade-sugar-free-low-fat-khari-biscuit-twistie-pack-of-1-original-imagfghhp7pdbdnp.jpeg?q=70" />
                 </Col>
                 <Col xs={{ span: 12}} sm={{ span: 12}} md={{ span: 8}} lg={{ span: 4 }}>
-                       <ProductCard  discount={false} loading={false} imgg="https://cdn.shopify.com/s/files/1/0024/1152/8253/products/img-cake-5_0ec79749-007d-466c-80b5-70220bc8febe_grande.jpg?v=1524991521" />
+                       <ProductCard  productData={elment} discount={false} loading={false} imgg="https://cdn.shopify.com/s/files/1/0024/1152/8253/products/img-cake-5_0ec79749-007d-466c-80b5-70220bc8febe_grande.jpg?v=1524991521" />
                 </Col>
                 <Col xs={{ span: 12 }} sm={{ span: 12}} md={{ span: 8}} lg={{ span: 4 }}>
-                       <ProductCard discount={true} loading={false} imgg="https://rukminim2.flixcart.com/image/416/416/kjom6q80-0/cookie-biscuit/h/m/m/250-premium-raggi-cookies-250-gm-1-akd-original-imafz73d9mzpn7h9.jpeg?q=70" />
+                       <ProductCard productData={elment} discount={true} loading={false} imgg="https://rukminim2.flixcart.com/image/416/416/kjom6q80-0/cookie-biscuit/h/m/m/250-premium-raggi-cookies-250-gm-1-akd-original-imafz73d9mzpn7h9.jpeg?q=70" />
                 </Col>
                 <Col xs={{ span: 12 }} sm={{ span: 12}} md={{ span: 8}} lg={{ span: 4 }}>
-                       <ProductCard  discount={false} loading={false} imgg="https://rukminim2.flixcart.com/image/416/416/km82d8w0/rusk/u/c/f/500-old-delhi-s-famous-fresh-crispy-soft-egg-cake-rusks-cake-original-imagf6knhnx45y9e.jpeg?q=70" />
+                       <ProductCard productData={elment}  discount={false} loading={false} imgg="https://rukminim2.flixcart.com/image/416/416/km82d8w0/rusk/u/c/f/500-old-delhi-s-famous-fresh-crispy-soft-egg-cake-rusks-cake-original-imagf6knhnx45y9e.jpeg?q=70" />
                 </Col>
                 <Col xs={{ span: 12 }} sm={{ span: 12}} md={{ span: 8}} lg={{ span: 4 }}>
-                       <ProductCard   discount={false} loading={false} imgg="https://m.media-amazon.com/images/I/91aVePdCaDL._SX569_.jpg" />
+                       <ProductCard productData={elment}  discount={false} loading={false} imgg="https://m.media-amazon.com/images/I/91aVePdCaDL._SX569_.jpg" />
                 </Col>
                 <Col xs={{ span: 12 }} sm={{ span: 12}} md={{ span: 8}} lg={{ span: 4 }}>
-                       <ProductCard discount={false} loading={false} imgg="https://www.bigbasket.com/media/uploads/p/l/40106021_10-tasties-biscuits-moon.jpg" /> 
+                       <ProductCard productData={elment} discount={false} loading={false} imgg="https://www.bigbasket.com/media/uploads/p/l/40106021_10-tasties-biscuits-moon.jpg" /> 
                 </Col>
             </Row>
          </div>
