@@ -1,4 +1,4 @@
-import React, { Suspense, lazy } from 'react';
+import React, { Suspense, lazy, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes  } from 'react-router-dom';
 import { HOME, ABOUTUS, CONTACT, PRODUCTLIST, PRODUCTDETAIL, CART, LOGIN, REGISTER, CHECKOUT } from "./constants/routes";
 import { useSelector, useDispatch } from 'react-redux'
@@ -6,7 +6,7 @@ import { checkLogin } from './redux_store/features/checkIsLoginSlice';
 import { Layout } from 'antd';
 import MobileHeader from "./components/MobileHeader";
 import DesktopHeader from "./components/DesktopHeader";
-
+import {fetchAllProductsPrices,gettotalamt } from "./redux_store/actions/actionss";
 const { Header, Content, Footer } = Layout;
 const Home = lazy(() => import('./pages/Home'));
 const AboutUs = lazy(() => import('./pages/AboutUs'));
@@ -22,7 +22,17 @@ const CSVData = lazy(() => import('./components/CSVDownload'));
 function Routers() {
 const dispatch = useDispatch()
 const isLogin = useSelector((state) => state.isLogin);
-
+useEffect(() => {
+  if(JSON.parse(localStorage.getItem('cartData'))){
+    getCartDataFromLocalstorage();
+  }
+ 
+},[]);
+// when app is refresh get CartData From Localstorage and store in redux store
+const getCartDataFromLocalstorage = async() => {
+  await dispatch(fetchAllProductsPrices());
+  await dispatch(gettotalamt());
+}
  console.log("isLogin",isLogin);
   return (
     <Router>
