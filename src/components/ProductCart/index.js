@@ -26,7 +26,7 @@ export default function ProductCart({data}) {
       dispatch(changeCart());
       dispatch(gettotalamt());
   } 
-
+console.log(data)
   return (
     <Row >
                 <Col  lg={{ span: 6 }} md={{span:6}} sm={{span:6}} xs={{span:7}} >
@@ -34,13 +34,19 @@ export default function ProductCart({data}) {
                   className='cart-pro-img'/>
                 </Col>
                 <Col  lg={{ span: 18 }} md={{span:18}} sm={{span:18}} xs={{span:17}} >
+                  <div style={{marginLeft:"10px"}}>
                   <h3>{data.title}</h3>
                   {/* <label>200 g</label><br/>
                   <label>Seller:UNIVERSALPRODUCTSGROUP</label><br/> */}
                   <div style={{marginTop: "4px"}}>
-                  <span className='mainruperss-cart'>₹{data.price}</span>
-                    <span className='mrpruperss-cart'>₹{data.mrp}</span>
-                    <span className='discountt-cart'>{data.discount}% off</span>
+                  <span className='mainruperss-cart'>{data.productQty}: ₹{data.price}</span>
+                  {data.price !== data.mrp ? 
+                  <>
+                   <span className='mrpruperss-cart'>₹{data.mrp}</span>
+                   <span className='discountt-cart'>{data.discount}% off</span>
+                   </>
+                   :null}
+                   
                   </div>
                   <Button onClick={ () => incrementPro(data.id)}
                   className='PlusButton-cart' type="primary" icon={<FontAwesomeIcon icon={faPlus}    />}  />
@@ -49,6 +55,7 @@ export default function ProductCart({data}) {
                   className='MinusButton-cart' type="primary" icon={<FontAwesomeIcon icon={faMinus} />}  />
                   <Button onClick={ () => removePro(data.id)}
                   className='delete-cart-pro' type="primary" icon={<FontAwesomeIcon style={{fontSize:"20px"}} icon={faTrashCan} />}  /> 
+                </div>
                 </Col>
                </Row> 
   )

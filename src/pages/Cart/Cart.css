@@ -1,6 +1,6 @@
 
 .mainruperss-cart{
-    font-size: 23px;
+    font-size: 20px;
     font-weight: 700;
     padding-right: 10px;
 }
@@ -96,6 +96,6 @@
 @media only screen and (min-width: 768px) {
     .cart-pro-img{
         width: 100%;
-        height: 157px;
+        height: 114px;
     }
 }

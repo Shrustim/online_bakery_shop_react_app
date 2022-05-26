@@ -13,6 +13,7 @@ export default function ProductCard({productData,imgg,loading,noPadding}) {
     const [mrp,setMrp] = useState(productData.pricedata[0].price);
     const [finalPrice,setFinalPrice] = useState(productData.pricedata[0].totalPrice);
     const [discount,setDiscount] = useState(productData.pricedata[0].discount);
+    const [qtyProductShow,setQtyProductShow] = useState(productData.pricedata[0].qty+" "+productData.pricedata[0].unitName);
     const [qtyProduct,setQtyProduct] = useState(1);
     const [productPriceId,setProductPriceId] = useState(productData.pricedata[0].id);
     // console.log("productData------",productData)
@@ -23,8 +24,10 @@ export default function ProductCard({productData,imgg,loading,noPadding}) {
         setFinalPrice(pricedata.totalPrice);
         setDiscount(pricedata.discount);
         setMrp(pricedata.price);
+        setQtyProductShow(pricedata.qty+" "+pricedata.unitName);
         console.log("pricedata",pricedata);
       }
+      console.log(productData)
     //add product  to cart 
     const addToCart = () =>{
         // document.getElementById("modaladdtocartt").style.display = "block";
@@ -38,7 +41,7 @@ export default function ProductCard({productData,imgg,loading,noPadding}) {
               'qty':qtyProduct,
               "mrp":mrp,
               "discount":discount,
-              "productQty":"350Gm",
+              "productQty":qtyProductShow,
               'subamout':subamout.toFixed(2)
             };
          
