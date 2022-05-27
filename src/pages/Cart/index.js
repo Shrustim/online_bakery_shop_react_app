@@ -4,9 +4,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {  faCartShopping} from '@fortawesome/free-solid-svg-icons'
 import ProductCart from "../../components/ProductCart";
 import { useSelector ,useDispatch } from "react-redux";
+import { Link } from 'react-router-dom';
+import {CHECKOUT} from "../../constants/routes";
 import "./Cart.css";
 export default function Cart() {
-  
+   
   const cartData = useSelector((state) => state.cart);
   console.log(cartData);
  
@@ -35,8 +37,9 @@ export default function Cart() {
                           
                           
                       <div>
-
+                      <Link to={CHECKOUT}>
                         <Button type="primary" size="small" className='placeorderButton'> <FontAwesomeIcon style={{marginRight:"10px"}} icon={faCartShopping} /> Place Order</Button>
+                        </Link>
                       </div>
                  </div>
                  </div>
@@ -48,8 +51,8 @@ export default function Cart() {
                 <h2>PRICE DETAILS</h2><br/>
                 <h4 className='cart-rs-tag'>Price  <span>₹{cartData.total}</span></h4>
                 <h4 className='cart-rs-tag'>Qty  <span>{cartData.cart.length}</span></h4>
-                <h4 className='cart-rs-tag'>Discount <span style={{color:"green"}}>- ₹1598</span></h4>
-                <h4 className='cart-rs-tag'>Delivery Charges  <span>₹40</span></h4>
+                <h4 className='cart-rs-tag'>Discount <span style={{color:"green"}}>- ₹0</span></h4>
+                <h4 className='cart-rs-tag'>Delivery Charges  <span>₹0</span></h4>
                 <h2 className='cart-rs-tag' style={{fontSize:"20px"}}>Total Amount <span>₹{cartData.total}</span></h2>
                 </div>
                

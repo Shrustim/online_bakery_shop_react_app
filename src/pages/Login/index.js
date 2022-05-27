@@ -1,12 +1,38 @@
-import React from 'react'
+import React,{useState,useEffect} from 'react'
 import "./login.css";
 import { REGISTER } from "../../constants/routes";
-import { Form, Input, Button, Checkbox,Row, Col } from 'antd';
+import { Form, Input, Button, Checkbox,Row, Col,message } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
+import { useNavigate  } from "react-router-dom";
 import { Link } from 'react-router-dom';
+import api from "../../helpers/axios";
+import { login } from '../../redux_store/features/checkIsLoginSlice';
+import {useDispatch } from "react-redux";
 export default function Login() {
-    const onFinish = (values) => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [form] = Form.useForm();
+  const [loading,setLoading] = useState(false);
+    const onFinish = async(values) => {
         console.log('Received values of form: ', values);
+        var finalValue = {
+          "name":values.mobileNo,
+          "mobileNo": values.mobileNo,
+          "password": values.password
+        }
+        const result = await api.post('users/login',finalValue);
+        if(result.data.token){
+          localStorage.setItem("token", JSON.stringify(""+result.data.token+""));
+          form.resetFields()
+          setLoading(false)
+          dispatch(login());
+          navigate("/checkout");
+
+        }else{
+          message.error('Invalid mobile no or password!');
+        }
+     
+        
       };
   return (
     <div>
@@ -16,7 +42,8 @@ export default function Login() {
                <Col  lg={{ span: 8 }} md={{span:16}} sm={{span:20}} xs={{span:24}}>
                  <div className='login-Box'>
                    <h2 style={{textAlign: "center"}}>Login</h2>
-               <Form
+      <Form
+      form={form}
       name="normal_login"
       className="login-form"
       initialValues={{
@@ -25,15 +52,15 @@ export default function Login() {
       onFinish={onFinish}
     >
       <Form.Item
-        name="username"
+        name="mobileNo"
         rules={[
           {
             required: true,
-            message: 'Please input your Username!',
+            message: 'Please input your Mobile no!',
           },
         ]}
       >
-        <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Username" />
+        <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Mobile no" />
       </Form.Item>
       <Form.Item
         name="password"

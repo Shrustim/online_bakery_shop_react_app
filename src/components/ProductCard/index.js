@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from 'react'
-import { Card, Select, Button  } from 'antd';
+import { Card, Select, Button  ,message} from 'antd';
 import Truncate from 'react-truncate';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {  faPlus, faMinus} from '@fortawesome/free-solid-svg-icons';
@@ -7,7 +7,7 @@ import {  useDispatch } from "react-redux";
 import {addtoCart,gettotalamt} from "../../redux_store/actions/actionss"
 import "./ProductCard.css";
 const { Meta } = Card;
-const { Option } = Select;
+const { Option } = Select; 
 export default function ProductCard({productData,imgg,loading,noPadding}) {
     const dispatch = useDispatch();
     const [mrp,setMrp] = useState(productData.pricedata[0].price);
@@ -47,6 +47,7 @@ export default function ProductCard({productData,imgg,loading,noPadding}) {
          
             dispatch(addtoCart(newarray));
             dispatch(gettotalamt());
+            message.success('Product added to cart successfully');
         //  setTimeout(function(){  document.getElementById("modaladdtocartt").style.display = "none";
         //   history.push('/cart');
         // }, 1000);

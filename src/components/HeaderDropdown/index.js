@@ -1,23 +1,49 @@
-import { Menu, Dropdown } from 'antd';
-import { DownOutlined } from '@ant-design/icons';
+import { Menu } from 'antd';
+import { useSelector, useDispatch } from 'react-redux'
+import { Link } from 'react-router-dom';
 import "./HeaderDropDown.css";
+import {LOGIN,REGISTER,CHECKOUT} from "../../constants/routes";
+import { logout } from '../../redux_store/features/checkIsLoginSlice';
 const HeaderDropDown  = ({categoryId}) => { 
+    const dispatch = useDispatch()
+    const isLogin = useSelector((state) => state.isLogin);
+    const logoutUser = () => {
+        dispatch(logout());
+    }
     console.log("categoryId",categoryId);
     if(categoryId === "0") {
           return(
             <Menu className='HeaderDropDownAccount'>
                 <div >
-                <Menu.Item>
-                    <a target="_blank" rel="noopener noreferrer" href="https://www.antgroup.com">
-                   Login
-                    </a>
-                </Menu.Item>
-    
-                <Menu.Item>
-                    <a target="_blank" rel="noopener noreferrer" href="https://www.antgroup.com">
-                    Register
-                    </a>
-                </Menu.Item>
+                    {isLogin ? 
+                     <>
+                     <Menu.Item>
+                         <Link to={CHECKOUT}>Profile</Link>
+                      
+                    </Menu.Item> 
+        
+                    <Menu.Item>
+                    <Link to={REGISTER}>Orders </Link>
+                      
+                    </Menu.Item>
+                    <Menu.Item>
+                    <Link onClick={logoutUser} to="#">Logout </Link>
+                      
+                    </Menu.Item>
+                    </>
+                    : <>
+                      <Menu.Item>
+                         <Link to={LOGIN}>Login</Link>
+                      
+                    </Menu.Item> 
+        
+                    <Menu.Item>
+                    <Link to={REGISTER}>Register</Link>
+                      
+                    </Menu.Item>
+                    </>
+                    }
+               
     
                 </div>
                

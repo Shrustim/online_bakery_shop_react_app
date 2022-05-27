@@ -5,14 +5,17 @@ import { Dropdown} from 'antd';
 import logo from "../../assets/images/logoo.jpg";
 import HeaderDropDown from "../HeaderDropdown";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { useSelector  } from "react-redux";
 import {  faMagnifyingGlass ,faUser,faCartShopping, faHeart} from '@fortawesome/free-solid-svg-icons'
 import "./DesktopHeader.css";
 import api from "../../helpers/axios";
 
 export default function DesktopHeader() {
+  
   const [category,setCategory] = useState([]);
   const [categoryId,setCategoryId] = useState("0");
-  useEffect(()=>{
+  const cartData = useSelector((state) => state.cart);
+ useEffect(()=>{
     fetchCategory();
   },[]);
   const fetchCategory = async () => {
@@ -54,8 +57,8 @@ export default function DesktopHeader() {
              <Link to={CONTACT} className="header-titles" >Snacks  </Link>
              <Link to={CONTACT} className="header-titles" >Sweet goods   </Link> */}
                <Link to={CONTACT} className="header-titles" ><FontAwesomeIcon icon={faMagnifyingGlass} />  </Link>
-               <Link to={PRODUCTLIST} className="header-titles" ><FontAwesomeIcon icon={faCartShopping} /> <span className="header-span"> 0</span> </Link>
-               <Link to={CART} className="header-titles" > <FontAwesomeIcon icon={faHeart} /> <span className="header-span"> 0</span> </Link>
+               <Link to={CART} className="header-titles" ><FontAwesomeIcon icon={faCartShopping} /> <span className="header-span"> {cartData.cart.length}</span> </Link>
+               <Link to={PRODUCTLIST} className="header-titles" > <FontAwesomeIcon icon={faHeart} /> <span className="header-span"> 0</span> </Link>
             
       <Dropdown overlay={<HeaderDropDown categoryId="0" />}>
       
