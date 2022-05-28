@@ -22,7 +22,9 @@ export default function Login() {
         }
         const result = await api.post('users/login',finalValue);
         if(result.data.token){
+          const userData = await api.get('users?filter=%7B%22where%22%3A%20%7B%22mobileNo%22%3A%20%22'+values.mobileNo+'%22%2C%22password%22%3A%20%22'+values.password+'%22%7D%2C%22fields%22%3A%20%7B%22id%22%3A%20true%2C%22name%22%3A%20true%2C%22mobileNo%22%3A%20true%2C%22pincodeId%22%3A%20true%2C%22address%22%3A%20true%2C%22is_active%22%3A%20true%7D%7D');
           localStorage.setItem("token", JSON.stringify(""+result.data.token+""));
+          localStorage.setItem("userData", JSON.stringify(userData.data[0]));
           form.resetFields()
           setLoading(false)
           dispatch(login());

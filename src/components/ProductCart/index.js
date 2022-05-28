@@ -26,7 +26,7 @@ export default function ProductCart({data}) {
       dispatch(changeCart());
       dispatch(gettotalamt());
   } 
-console.log(data)
+// console.log(data)
   return (
     <Row >
                 <Col  lg={{ span: 6 }} md={{span:6}} sm={{span:6}} xs={{span:7}} >

@@ -97,7 +97,7 @@ export default function ProductCard({productData,imgg,loading,noPadding}) {
                     </Select>
 
                     <h4><b>Mrp: ₹ {finalPrice}</b> 
-                    {finalPrice !== mrp? <span><strike>{mrp}</strike></span>:null}
+                    {finalPrice !== mrp? <span> <strike>₹{mrp}</strike></span>:null}
                     </h4>
                     <div className='buttonbox'>
                         <Button className='PlusButton' type="primary" icon={<FontAwesomeIcon icon={faPlus}    />}  

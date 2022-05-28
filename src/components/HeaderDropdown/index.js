@@ -2,13 +2,16 @@ import { Menu } from 'antd';
 import { useSelector, useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom';
 import "./HeaderDropDown.css";
+import { useNavigate  } from "react-router-dom";
 import {LOGIN,REGISTER,CHECKOUT} from "../../constants/routes";
 import { logout } from '../../redux_store/features/checkIsLoginSlice';
 const HeaderDropDown  = ({categoryId}) => { 
     const dispatch = useDispatch()
+    const navigate = useNavigate();
     const isLogin = useSelector((state) => state.isLogin);
-    const logoutUser = () => {
-        dispatch(logout());
+    const logoutUser = async() => {
+        await dispatch(logout());
+        await navigate("/login");
     }
     console.log("categoryId",categoryId);
     if(categoryId === "0") {
