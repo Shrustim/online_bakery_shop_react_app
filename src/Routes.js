@@ -1,6 +1,7 @@
 import React, { Suspense, lazy, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes  } from 'react-router-dom';
-import { HOME, ABOUTUS, CONTACT, PRODUCTLIST, PRODUCTDETAIL, CART, LOGIN, REGISTER, CHECKOUT } from "./constants/routes";
+import { HOME, ABOUTUS, CONTACT, PRODUCTLIST, PRODUCTDETAIL, CART, LOGIN, REGISTER, 
+  ORDER_DETAIL, ORDER_LIST, CHECKOUT } from "./constants/routes";
 import { useSelector, useDispatch } from 'react-redux'
 import { Layout } from 'antd';
 import MobileHeader from "./components/MobileHeader";
@@ -17,6 +18,8 @@ const Cart = lazy(() => import('./pages/Cart'));
 const Login = lazy(() => import('./pages/Login'));
 const Register = lazy(() => import('./pages/Register'));
 const Checkout = lazy(() => import('./pages/Checkout'));
+const OrderDetail = lazy(() => import('./pages/Order/detail'));
+const OrderList = lazy(() => import('./pages/Order/list'));
 const CSVData = lazy(() => import('./components/CSVDownload'));
 
 function Routers() {
@@ -64,6 +67,8 @@ const getCartDataFromLocalstorage = async() => {
                             <Route path={LOGIN} element={<Login/>} /> 
                             <Route path={REGISTER} element={<Register/>} /> 
                             <Route path={CHECKOUT} element={<Checkout/>} /> 
+                            <Route path={ORDER_DETAIL+"/:id"} element={<OrderDetail/>} /> 
+                            <Route path={ORDER_LIST} element={<OrderList/>} /> 
                             <Route path={"csv"} element={<CSVData/>} />
                       </Routes>
                   </Suspense>

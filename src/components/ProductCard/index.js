@@ -27,7 +27,7 @@ export default function ProductCard({productData,imgg,loading,noPadding}) {
         setQtyProductShow(pricedata.qty+" "+pricedata.unitName);
         console.log("pricedata",pricedata);
       }
-      console.log(productData)
+    //   console.log(productData)
     //add product  to cart 
     const addToCart = () =>{
         // document.getElementById("modaladdtocartt").style.display = "block";

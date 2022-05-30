@@ -1,14 +1,17 @@
 import React,{useState,useEffect} from 'react'
 import "./checkout.css";
-import { Link } from 'react-router-dom';
 import { useNavigate  } from "react-router-dom";
-import { LOGIN } from "../../constants/routes";
-import { Form, Input, Button,Row, Col,Select } from 'antd';
+import { ORDER_DETAIL } from "../../constants/routes";
+import { Form, Input, Button,Row, Col,Select,message } from 'antd';
 import { useSelector ,useDispatch } from "react-redux";
+import { removefromCart,gettotalamt} from "../../redux_store/actions/actionss"
+
 import api from "../../helpers/axios";
+import {WithTokenApi } from "../../helpers/axios"
 const { Option } = Select;
 
 export default function Checkout() {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const cartData = useSelector((state) => state.cart);
   const userData = JSON.parse(localStorage.getItem("userData"));
@@ -40,10 +43,10 @@ console.log("userData",userData)
     return yyyy + '-' + (mmChars[1]?mm:"0"+mmChars[0]) + '-' + (ddChars[1]?dd:"0"+ddChars[0]);
   }
   const onFinish = async (values) => {
-    // setLoading(true)
+    setLoading(true)
     var todaysDate = new Date();
     if (cartData.cart.length > 0) {  
-      console.log('Received values of form: ', values);
+      // console.log('Received values of form: ', values);
       const orderData = {
           "userId": userData.id,
           "totalPrice": cartData.total,
@@ -53,18 +56,19 @@ console.log("userData",userData)
           "orderDate": ""+convertDate(todaysDate)+"",
           "is_active": 1
       }
-      console.log("orderdata",orderData)
-
-        cartData.cart.map(async(e)=>{
-          console.log(e)
+     
+      // console.log("orderdata",orderData)
+      const result = await WithTokenApi.post('orders',orderData);
+        cartData.cart.map(async(e,index)=>{
+          // console.log(e)
           var resultData  = await api.get('productprices/'+e.id+'?filter=%7B%22fields%22%3A%20%7B%22id%22%3A%20true%2C%22productId%22%3A%20true%2C%22unitId%22%3A%20true%2C%22qty%22%3A%20true%2C%22price%22%3A%20true%2C%22discount%22%3A%20true%2C%22totalPrice%22%3A%20true%2C%22is_show%22%3A%20true%2C%22is_active%22%3A%20true%7D%7D');
-          console.log("resultData",resultData);
+          // console.log("resultData",resultData);
           var subamout = e.qty * resultData.data.totalPrice;
           var orderProduct = {
-            "orderId": 0,
+            "orderId": result.data.id,
             "userId":userData.id,
             "productId": e.Productid,
-            "totalPrice": subamout.toFixed(2),
+            "totalPrice": parseFloat(subamout.toFixed(2)),
             "qty": e.qty,
             "price": resultData.data.totalPrice,
             "unitId": resultData.data.unitId,
@@ -74,43 +78,20 @@ console.log("userData",userData)
             "is_active": 1
              
           };
-          console.log("orderProduct",orderProduct)
-          // const orderProduct = {
-          //   "orderId": 0,
-          //   "userId":userData.id,
-          //   "productId": curElem.Productid,
-          //   "totalPrice": curElem.subamout,
-          //   "qty": qty,
-          //   "price": price,
-          //   "unitId": id,
-          //   "discount": 0,
-          //   "dbPrice": 0,
-          //   "dbQty": 0,
-          //   "is_active": 1
-          // }
-              })
-
-   }
+          dispatch(removefromCart(resultData.data.id));
+          // console.log("orderproducts",orderProduct)
+           await WithTokenApi.post('orderproducts',orderProduct);
+          if(index === (cartData.cart.length - 1)){
+              await localStorage.removeItem("cartData");
+              await dispatch(gettotalamt());
+              message.success('Order successfully placed');
+              setLoading(false)
+              navigate(ORDER_DETAIL+"/"+result.data.id);
+          }
+         })
+  }
        
  
-      //   const checkresult = await api.get("users?filter=%7B%22where%22%3A%7B%22mobileNo%22%3A%20%22"+values.mobileNo+"%22%7D%7D")
-      //  if(checkresult.data.length > 0){
-      //   message.error('Mobile number already exits!');
-      //   setLoading(false)
-      //  }else{
-      //   var finalValue = {
-      //     "name": values.name,
-      //     "mobileNo": values.mobileNo,
-      //     "pincodeId": values.pincodeId,
-      //     "address": values.address,
-      //     "password": values.password,
-      //     "is_active": 1
-      //   }
-      //   const result = await api.post('users',finalValue);
-      //   form.resetFields()
-      //   setLoading(false)
-      //   navigate("/login");
-      //  }
         
   };
   

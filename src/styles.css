@@ -144,3 +144,8 @@
 .heading-home-divider{
   justify-content: center;
 }
+
+.ant-table-content{
+  width: 100%;
+  overflow: auto;
+}
