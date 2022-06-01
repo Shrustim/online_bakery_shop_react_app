@@ -1,0 +1,9 @@
+.orderLabel{
+    color: #5c6166;
+}
+
+.backButtonOrder{
+    float: right;
+    background: var(--mainColor) !important;
+    border-color: var(--mainColor) !important;
+}

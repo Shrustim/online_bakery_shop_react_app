@@ -49,8 +49,8 @@ const columns = [
     },
     {
       title: 'Pincode',
-      dataIndex: 'pincodeId',
-      key: 'pincodeId',
+      dataIndex: 'pincodeNo',
+      key: 'pincodeNo',
     }
   ];
   
@@ -63,7 +63,7 @@ export default function OrderList() {
     },[])
     const fetchOrderList = async() => {
 
-        const result = await WithTokenApi.get('orders?filter=%7B%22where%22%3A%20%7B%22userId%22%3A%20'+userData.id+'%7D%7D');
+        const result = await WithTokenApi.get('ordersList/'+userData.id);
         if(result.data){
             setOrderList(result.data)
         }

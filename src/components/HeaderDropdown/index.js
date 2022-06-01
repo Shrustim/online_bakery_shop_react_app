@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom';
 import "./HeaderDropDown.css";
 import { useNavigate  } from "react-router-dom";
-import {LOGIN,REGISTER,CHECKOUT,ORDER_LIST} from "../../constants/routes";
+import {LOGIN,REGISTER,CHECKOUT,ORDER_LIST,PROFILE} from "../../constants/routes";
 import { logout } from '../../redux_store/features/checkIsLoginSlice';
 const HeaderDropDown  = ({categoryId}) => { 
     const dispatch = useDispatch()
@@ -21,7 +21,7 @@ const HeaderDropDown  = ({categoryId}) => {
                     {isLogin ? 
                      <>
                      <Menu.Item>
-                         <Link to={CHECKOUT}>Profile</Link>
+                         <Link to={PROFILE}>Profile</Link>
                       
                     </Menu.Item> 
         

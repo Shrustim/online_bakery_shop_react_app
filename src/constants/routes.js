@@ -10,3 +10,4 @@ export const REGISTER = "/register";
 export const CHECKOUT = "/checkout";
 export const ORDER_DETAIL = "/order_detail";
 export const ORDER_LIST = "/order_list";
+export const PROFILE = "/profile";
