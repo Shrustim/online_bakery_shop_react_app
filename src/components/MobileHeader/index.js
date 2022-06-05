@@ -1,20 +1,34 @@
 import React,{useState,useEffect} from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {  faBars,faCartShopping, faBell} from '@fortawesome/free-solid-svg-icons'
+import {  faBars,faCartShopping, faBell,faUser,faHome, faList, faLock} from '@fortawesome/free-solid-svg-icons'
 import logo from "../../assets/images/logoo.jpg"
+import { Link } from 'react-router-dom';
 import { Drawer,Collapse  } from 'antd';
+import { useNavigate  } from "react-router-dom";
 import { CaretRightOutlined } from '@ant-design/icons';
 import "./MobileHeader.css";
+import { useSelector ,useDispatch } from "react-redux";
+import { HOME,  LOGIN,REGISTER,ORDER_LIST,PROFILE, CART } from "../../constants/routes";
+import { logout } from '../../redux_store/features/checkIsLoginSlice';
 import api from "../../helpers/axios";
 const { Panel } = Collapse;
 export default function MobileHeader() {
+  const dispatch = useDispatch()
+  const navigate = useNavigate();
   const [category,setCategory] = useState([]);
   const [visible, setVisible] = useState(false);
+  const cartData = useSelector((state) => state.cart);
+  const isLogin = useSelector((state) => state.isLogin);
+  const logoutUser = async() => {
+      await dispatch(logout());
+      await navigate("/login");
+      setVisible(false); 
+  }
   const showDrawer = () => {
     setVisible(true);
   };
   const onClose = () => {
-    setVisible(false);
+    setVisible(false); 
   };
   
 
@@ -31,13 +45,13 @@ const fetchCategory = async () => {
       <FontAwesomeIcon icon={faBars} className="menuIcon" onClick={showDrawer} />
       <div style={{width: "81%",marginLeft: "13%"}}>
         <center>
-        <img src={logo} className="logo-mobile-header" />
+        <Link to={HOME}> <img src={logo} className="logo-mobile-header" /></Link>
         </center>
      
       </div>
       <div>
-            <FontAwesomeIcon icon={faCartShopping} className="menuIcon mobileHeaderIcon"  />
-            <span className="mobile-header-span"> 0</span>
+      <Link to={CART} className="linkColor" > <FontAwesomeIcon icon={faCartShopping} className="menuIcon mobileHeaderIcon"  />
+            <span className="mobile-header-span"> {cartData.cart.length}</span></Link>
       </div>
       <div>
             <FontAwesomeIcon icon={faBell} className="menuIcon mobileHeaderIcon" />
@@ -46,7 +60,33 @@ const fetchCategory = async () => {
      
       
 
-      <Drawer title="Bakery" placement="left" onClose={onClose} visible={visible}>
+      <Drawer title={<Link to={HOME}> <img src={logo} className="logo-mobile-header" /></Link>} placement="left" onClose={onClose} visible={visible}>
+      <Link to={HOME}> <h4 className='drawerMenulist' onClick={onClose}><b>
+      <FontAwesomeIcon icon={faHome} className="small-iconn" style={{marginRight:"5px",fontSize:"14px"}} /> 
+      Home</b></h4></Link>
+      {isLogin ? 
+      <>
+      <Link to={PROFILE}> <h4 className='drawerMenulist' onClick={onClose}><b>
+      <FontAwesomeIcon icon={faUser} className="small-iconn" style={{marginRight:"5px",fontSize:"14px"}} /> 
+      Profile</b></h4></Link> 
+      <Link to={ORDER_LIST}><h4 className='drawerMenulist' onClick={onClose}><b>
+      <FontAwesomeIcon icon={faList} className="small-iconn" style={{marginRight:"5px",fontSize:"14px"}} /> 
+      Orders</b></h4></Link> 
+      <h4 className='drawerMenulist' onClick={logoutUser} ><b>
+      <FontAwesomeIcon icon={faLock} className="small-iconn" style={{marginRight:"5px",fontSize:"14px"}} /> 
+        Logout</b></h4>
+      </>
+      :
+      <>
+      <Link to={LOGIN}>  <h4 className='drawerMenulist' onClick={onClose}><b>
+      <FontAwesomeIcon icon={faLock} className="small-iconn" style={{marginRight:"5px",fontSize:"14px"}} /> 
+      Login</b></h4></Link>
+      <Link to={REGISTER}> <h4 className='drawerMenulist' onClick={onClose}><b>
+      <FontAwesomeIcon icon={faUser} className="small-iconn" style={{marginRight:"5px",fontSize:"14px"}} /> 
+      Register</b></h4></Link>
+      </>
+    }
+      <br/>
         <h4 className='drawerMenulist'><b>Shop by category</b></h4>
         <Collapse
         bordered={false}

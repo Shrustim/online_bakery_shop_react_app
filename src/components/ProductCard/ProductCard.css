@@ -51,8 +51,8 @@ padding: 0;
     height: 29px;
     background: var(--mainColor) !important; 
     border-color: var(--mainColor) !important; 
-    width: 75px;
-    font-size: 11px;
+    width: 67px;
+    font-size: 10px;
 }
 
 .buttonbox{

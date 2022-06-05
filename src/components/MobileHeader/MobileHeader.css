@@ -21,6 +21,9 @@
     color: white;
     top: 20px;
 }
+.linkColor{
+    color: var(--mainColor);
+}
 .mobileHeaderIcon{
     padding-left: 17px;
     padding-right: 1px;
