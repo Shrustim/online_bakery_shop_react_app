@@ -36,12 +36,12 @@ export default function DesktopHeader() {
            return(
             <Dropdown overlay={<HeaderDropDown categoryId={categoryId}  />} key={elm.id}>
       
-            <a className="ant-dropdown-link header-titles" onClick={(e) =>  { e.preventDefault();setCategoryId(elm.id) }} onMouseOver={(e) =>  { setCategoryId(elm.id) }} >
+            <Link to={PRODUCTLIST+"/"+elm.id} className="ant-dropdown-link header-titles" onClick={(e) =>  { setCategoryId(elm.id) }} onMouseOver={(e) =>  { setCategoryId(elm.id) }} >
             {elm.categoryName} 
             {
              index === 0 || index === 2 ?  <span className="header-span"> Best</span> : null
             }
-            </a>
+            </Link>
           </Dropdown>
            )
         })
@@ -62,7 +62,7 @@ export default function DesktopHeader() {
             
       <Dropdown overlay={<HeaderDropDown categoryId="0" />}>
       
-      <a className="ant-dropdown-link header-titles" onClick={(e) =>  { e.preventDefault();setCategoryId(2) }} onMouseOver={(e) =>  { setCategoryId(2) }} >
+      <a className="ant-dropdown-link header-titles" onClick={(e) =>  { e.preventDefault(); }}  >
       <FontAwesomeIcon icon={faUser} /> 
       </a>
     </Dropdown>  

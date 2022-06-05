@@ -63,7 +63,9 @@ const getCartDataFromLocalstorage = async() => {
                             <Route  path={ABOUTUS} element={<AboutUs/>}/>
                             <Route  path={CONTACT} element={<Contact/>}/>
                             <Route path={PRODUCTLIST} element={<ProductList/>} /> 
-                            <Route path={PRODUCTDETAIL} element={<ProductDetail/>} /> 
+                            <Route path={PRODUCTLIST+"/:categoryId"} element={<ProductList/>} /> 
+                            <Route path={PRODUCTLIST+"/:categoryId/:subCategoryId"} element={<ProductList/>} /> 
+                            <Route path={PRODUCTDETAIL+"/:id"} element={<ProductDetail/>} /> 
                             <Route path={CART} element={<Cart/>} /> 
                             <Route path={LOGIN} element={<Login/>} /> 
                             <Route path={REGISTER} element={<Register/>} /> 

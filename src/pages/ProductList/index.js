@@ -1,14 +1,35 @@
-import React,{useState} from 'react'
+import React,{useState,useEffect} from 'react'
 import { Row, Col, Divider, Collapse ,Checkbox, Slider ,List,Select, Button ,Drawer   } from 'antd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars } from '@fortawesome/free-solid-svg-icons'
 import "./ProductList.css";
+import api from "../../helpers/axios";
 import ProductCard from "../../components/ProductCard";
 import { useMediaQuery } from 'react-responsive'
 
 const { Panel } = Collapse;
 const { Option } = Select;
 export default function ProductList() {
+  const [productListData,setproductListData] = useState([]);
+  useEffect(()=>{
+      fetchproductListData();
+  },[]);
+  var filter = {
+      "categoryId": 0, 
+      "subCategoryId": 0,
+      "unitId": 0,
+      "startPrice": 0,
+      "endPrice": 0,
+      "limit": 0,
+      "offset": 0
+    }
+  const fetchproductListData = async () => {
+      
+      
+      const result = await api.post('products-list',filter);
+      setproductListData(result.data);
+      // console.log("productListData----",result.data);
+  }
       const isDesktopOrLaptop = useMediaQuery({
         query: '(min-width: 1224px)'
       })
@@ -38,12 +59,7 @@ export default function ProductList() {
       };
 
       
-      const text = `
-  A dog is a type of domesticated animal.
-  Known for its loyalty and faithfulness,
-  it can be found as a welcome guest in many households across the world.
-`;
-
+  
 function onChange(checkedValues) {
     console.log('checked = ', checkedValues);
   }
@@ -209,10 +225,10 @@ function onChange(checkedValues) {
                     pageSize: 8,
                   }}
                     grid={{ gutter: 32, column: gridcolumn }}
-                    dataSource={data}
+                    dataSource={productListData}
                     renderItem={item => (
                     <List.Item>
-                             <ProductCard noPadding={true} discount={false} loading={false} imgg={item.title} />
+                             <ProductCard productData={item} noPadding={true} discount={false} loading={false} imgg={item.title} />
                
                     </List.Item>
                     )}

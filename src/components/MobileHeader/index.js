@@ -8,7 +8,7 @@ import { useNavigate  } from "react-router-dom";
 import { CaretRightOutlined } from '@ant-design/icons';
 import "./MobileHeader.css";
 import { useSelector ,useDispatch } from "react-redux";
-import { HOME,  LOGIN,REGISTER,ORDER_LIST,PROFILE, CART } from "../../constants/routes";
+import { HOME,  LOGIN,REGISTER,ORDER_LIST,PROFILE, CART,PRODUCTLIST } from "../../constants/routes";
 import { logout } from '../../redux_store/features/checkIsLoginSlice';
 import api from "../../helpers/axios";
 const { Panel } = Collapse;
@@ -98,7 +98,7 @@ const fetchCategory = async () => {
         category.length > 0 ?
         category.map((elm,index) => {
            return(
-            <Panel header={elm.categoryName} key={index} className="site-collapse-custom-panel">
+            <Panel header={<Link to={PRODUCTLIST+"/"+elm.id} className="subMenuMobile">{elm.categoryName}</Link>} key={index} className="site-collapse-custom-panel">
             <p>
               <ul className='subMenuMobile'>
                 <li>Crackers</li>

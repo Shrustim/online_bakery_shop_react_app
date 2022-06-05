@@ -5,6 +5,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {  faPlus, faMinus} from '@fortawesome/free-solid-svg-icons';
 import {  useDispatch } from "react-redux"; 
 import {addtoCart,gettotalamt} from "../../redux_store/actions/actionss"
+import { PRODUCTDETAIL } from "../../constants/routes"
+import { Link } from 'react-router-dom';
 import "./ProductCard.css";
 const { Meta } = Card;
 const { Option } = Select; 
@@ -72,7 +74,7 @@ export default function ProductCard({productData,imgg,loading,noPadding}) {
                         : null
                     }
                   
-                 <img className='product-card-img' src={productData.imageone} />
+                  <Link to={PRODUCTDETAIL+"/"+productData.id}>   <img className='product-card-img' src={productData.imageone} /></Link>
                  <div style={{paddingLeft:"12px",paddingRight:"12px",paddingBottom:"10px"}}>
                    <span className='product-card-title'>
                    <Truncate lines={2} ellipsis={<span>...</span>}>

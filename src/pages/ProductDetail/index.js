@@ -1,14 +1,35 @@
-import React from 'react'
+import React,{useState,useEffect} from 'react'
 import { Row, Col, Select ,Button ,Divider } from 'antd';
 import Truncate from 'react-truncate';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {  faPlus, faMinus,faCartShopping,faStar} from '@fortawesome/free-solid-svg-icons'
-import ProductCard from "../../components/ProductCard"
+import ProductCard from "../../components/ProductCard";
+import api from "../../helpers/axios";
 import "./ProductDetail.css";
 const { Option } = Select;
 export default function ProductDetail() {
   function handleChange(value) {
     console.log(value); // { value: "lucy", key: "lucy", label: "Lucy (101)" }
+  }
+  const [productListOne,setProductListOne] = useState([]);
+  useEffect(()=>{
+      fetchProductListOne();
+  },[]);
+  var filter = {
+      "categoryId": 0, 
+      "subCategoryId": 0,
+      "unitId": 0,
+      "startPrice": 0,
+      "endPrice": 0,
+      "limit": 0,
+      "offset": 0
+    }
+  const fetchProductListOne = async () => {
+      
+      
+      const result = await api.post('products-list',filter);
+      setProductListOne(result.data);
+      // console.log("productListOne----",result.data);
   }
   return (
        <div className="site-layout-content">
@@ -23,7 +44,7 @@ export default function ProductDetail() {
                         <img className='sideImage-detail' src="https://rukminim2.flixcart.com/image/416/416/kmkxbww0/cookie-biscuit/z/x/9/200-handmade-sugar-free-low-fat-khari-biscuit-twistie-pack-of-1-original-imagfghhp7pdbdnp.jpeg?q=70" /> <br/>
                         <img className='sideImage-detail' src="https://rukminim2.flixcart.com/image/416/416/km82d8w0/rusk/u/c/f/500-old-delhi-s-famous-fresh-crispy-soft-egg-cake-rusks-cake-original-imagf6knhnx45y9e.jpeg?q=70" /> <br/>
                       </Col>
-                      <Col  lg={{ span: 19 }} md={{span:19}} >
+                      <Col  lg={{ span: 19 }} md={{span:19}} sm={{span:24}}>
                       <img className='mainImage-detail' src="https://cdn.shopify.com/s/files/1/0024/1152/8253/products/img-cake-5_0ec79749-007d-466c-80b5-70220bc8febe_grande.jpg?v=1524991521" /> <br/>
                       </Col>
                    </Row>
@@ -74,7 +95,16 @@ export default function ProductDetail() {
          <Divider className='heading-home-divider'><h2 className='heading-home'><b><FontAwesomeIcon icon={faStar} className="heading-star" /><FontAwesomeIcon icon={faStar} className="heading-star" /><FontAwesomeIcon icon={faStar} className="heading-star" /> Similar Products <FontAwesomeIcon icon={faStar} className="heading-star" /><FontAwesomeIcon icon={faStar} className="heading-star" /><FontAwesomeIcon icon={faStar} className="heading-star" /> </b> </h2></Divider>
            
             <Row>
-                <Col xs={{ span: 12}} sm={{ span: 12}} md={{ span: 8}} lg={{ span: 4 }}>
+            {productListOne.length > 0 ?
+                  productListOne.map((elm,index)=> {
+                   return(  
+                     <Col xs={{ span: 12}} sm={{ span: 12}} md={{ span: 8}} lg={{ span: 4 }} key={elm.id}>
+                        <ProductCard productData={elm} discount={true} loading={false} imgg="https://rukminim2.flixcart.com/image/416/416/kmkxbww0/cookie-biscuit/z/x/9/200-handmade-sugar-free-low-fat-khari-biscuit-twistie-pack-of-1-original-imagfghhp7pdbdnp.jpeg?q=70" />
+                    </Col>
+                   )
+                  })               
+                 :null}
+                {/* <Col xs={{ span: 12}} sm={{ span: 12}} md={{ span: 8}} lg={{ span: 4 }}>
                        <ProductCard discount={true} loading={false} imgg="https://rukminim2.flixcart.com/image/416/416/kmkxbww0/cookie-biscuit/z/x/9/200-handmade-sugar-free-low-fat-khari-biscuit-twistie-pack-of-1-original-imagfghhp7pdbdnp.jpeg?q=70" />
                 </Col>
                 <Col xs={{ span: 12}} sm={{ span: 12}} md={{ span: 8}} lg={{ span: 4 }}>
@@ -91,7 +121,7 @@ export default function ProductDetail() {
                 </Col>
                 <Col xs={{ span: 12 }} sm={{ span: 12}} md={{ span: 8}} lg={{ span: 4 }}>
                        <ProductCard discount={false} loading={false} imgg="https://www.bigbasket.com/media/uploads/p/l/40106021_10-tasties-biscuits-moon.jpg" /> 
-                </Col>
+                </Col> */}
             </Row>
          </div>
     </div>         
