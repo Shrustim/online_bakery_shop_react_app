@@ -70,7 +70,7 @@ export default function OrderList() {
     }
     console.log("orderList----",orderList)
   return (
-    <div>
+    <div className="site-layout-content">
         <h2>Order List</h2>
         <Table columns={columns} dataSource={orderList} />
     </div>

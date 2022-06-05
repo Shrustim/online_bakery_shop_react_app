@@ -43,19 +43,30 @@ const Home = () => {
         fetchProductListOne();
         fetchProductListtwo();
     },[]);
+    var filter = {
+        "categoryId": 0,
+        "subCategoryId": 0,
+        "unitId": 0,
+        "startPrice": 0,
+        "endPrice": 0,
+        "limit": 0,
+        "offset": 0
+      }
     const fetchProductListOne = async () => {
-        const result = await api.get('products-list?filter=%7B%22offset%22%3A%200%2C%22limit%22%3A%206%2C%22where%22%3A%20%7B%22is_active%22%3A%201%7D%2C%22fields%22%3A%20%7B%22id%22%3A%20true%2C%22productName%22%3A%20true%2C%22categoryId%22%3A%20true%2C%22description%22%3A%20true%2C%22imageone%22%3A%20true%2C%22imagetwo%22%3A%20true%2C%20%20%22imagethree%22%3A%20true%2C%22imagefour%22%3A%20true%7D%7D');
+        
+        
+        const result = await api.post('products-list',filter);
         setProductListOne(result.data);
         // console.log("productListOne----",result.data);
     }
     const fetchProductListtwo = async () => {
-        const result = await api.get('products-list?filter=%7B%22offset%22%3A%206%2C%22limit%22%3A%206%2C%22where%22%3A%20%7B%22is_active%22%3A%201%7D%2C%22fields%22%3A%20%7B%22id%22%3A%20true%2C%22productName%22%3A%20true%2C%22categoryId%22%3A%20true%2C%22description%22%3A%20true%2C%22imageone%22%3A%20true%2C%22imagetwo%22%3A%20true%2C%20%20%22imagethree%22%3A%20true%2C%22imagefour%22%3A%20true%7D%7D');
+        const result = await api.post('products-list',filter);
         setProductListTwo(result.data);
         // console.log("setProductListTwo----",result.data);
     }
     //   console.log(productListOne)
 	return(
-         <div>
+        <div className="site-layout-content homePage">
               <div className='section-home' style={{paddingTop:"0px"}}>
           <Carousel autoplay effect="fade">
           <div>

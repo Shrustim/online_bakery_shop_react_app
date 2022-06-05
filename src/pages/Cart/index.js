@@ -18,7 +18,7 @@ export default function Cart() {
   }
   console.log("getTotalMrp",getTotalMrp)
   return (
-    <div>
+    <div className="site-layout-content">
          <Row>
                
                <Col  lg={{ span: 16 }} md={{span:16}} sm={{span:24}} xs={{span:24}} >

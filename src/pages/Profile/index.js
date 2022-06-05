@@ -38,7 +38,7 @@ export default function Profile() {
   };
   console.log(tabNo,"--------")
   return (
-    <div>
+    <div className="site-layout-content">
         <h1>Profile</h1>
        <Tabs defaultActiveKey={tabNo} onChange={(key)=>{
            settabNo(key)

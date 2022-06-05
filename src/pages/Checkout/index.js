@@ -96,7 +96,7 @@ console.log("userData",userData)
   };
   
   return (
-    <div> 
+    <div className="site-layout-content">
         <Row>
                
                <Col  lg={{ span: 7 }} md={{span:4}}  sm={{span:24}} xs={{span:24}}> </Col>

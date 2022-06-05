@@ -37,7 +37,7 @@ export default function Login() {
         
       };
   return (
-    <div>
+    <div className="site-layout-content">
         <Row>
                
                <Col  lg={{ span: 8 }} md={{span:4}}  sm={{span:2}} xs={{span:24}}> </Col>

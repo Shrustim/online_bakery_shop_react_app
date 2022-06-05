@@ -11,7 +11,7 @@ export default function ProductDetail() {
     console.log(value); // { value: "lucy", key: "lucy", label: "Lucy (101)" }
   }
   return (
-    <>
+       <div className="site-layout-content">
 
     <Row>
                
@@ -94,7 +94,7 @@ export default function ProductDetail() {
                 </Col>
             </Row>
          </div>
-    </>         
+    </div>         
   )
 }
  

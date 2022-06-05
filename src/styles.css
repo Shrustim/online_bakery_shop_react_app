@@ -91,10 +91,16 @@
 .hideOnDesktop{
   display: none;
 }
+ .homePage {
+  padding: 20px;
+}
 }
 
 /* media query for mobile */
 @media only screen and (max-width: 768px) {
+ .homePage {
+    padding: 0px;
+  }
   .MobileHeader{
     display: block;
   }

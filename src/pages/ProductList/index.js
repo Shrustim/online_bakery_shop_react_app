@@ -102,7 +102,7 @@ function onChange(checkedValues) {
     console.log(value); 
   }
   return (
-    <div>
+    <div className="site-layout-content">
             <Row>
                
                 <Col  lg={{ span: 5 }} md={{span:5}} >

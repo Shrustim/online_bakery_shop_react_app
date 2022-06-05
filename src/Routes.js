@@ -56,7 +56,7 @@ const getCartDataFromLocalstorage = async() => {
         <Content style={{ padding: '0 50px' }}>
           <div style={{ margin: '16px 0' }}>
           </div>
-               <div className="site-layout-content">
+               <div>
                  <Suspense fallback={<div>Loading...</div>}>
                       <Routes>
                             <Route exact path={HOME} element={<Home/>}/>

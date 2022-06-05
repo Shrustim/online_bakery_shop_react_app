@@ -64,7 +64,7 @@ export default function OrderDetail() {
 
 
   return (
-    <div>
+    <div className="site-layout-content">
       <h1>Order Detail
      <Link to={ORDER_LIST} > <Button type="primary" className='backButtonOrder'>Back </Button></Link>
       </h1>
