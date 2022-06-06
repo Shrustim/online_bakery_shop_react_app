@@ -98,7 +98,7 @@ const fetchCategory = async () => {
         category.length > 0 ?
         category.map((elm,index) => {
            return(
-            <Panel header={<Link to={PRODUCTLIST+"/"+elm.id} className="subMenuMobile">{elm.categoryName}</Link>} key={index} className="site-collapse-custom-panel">
+            <Panel header={<Link to={PRODUCTLIST+"/"+elm.id} onClick={onClose} className="subMenuMobile">{elm.categoryName}</Link>} key={index} className="site-collapse-custom-panel">
             <p>
               <ul className='subMenuMobile'>
                 <li>Crackers</li>

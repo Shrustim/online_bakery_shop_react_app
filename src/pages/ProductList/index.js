@@ -4,16 +4,29 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars } from '@fortawesome/free-solid-svg-icons'
 import "./ProductList.css";
 import api from "../../helpers/axios";
+import { useParams } from 'react-router';
 import ProductCard from "../../components/ProductCard";
 import { useMediaQuery } from 'react-responsive'
 
 const { Panel } = Collapse;
 const { Option } = Select;
 export default function ProductList() {
+  const { categoryId, subCategoryId } = useParams();
+  console.log("-----------",categoryId,
+  "-------------",subCategoryId)
   const [productListData,setproductListData] = useState([]);
   useEffect(()=>{
+    if(typeof categoryId === "undefined" && typeof subCategoryId === "undefined"){
       fetchproductListData();
+    }
+      
   },[]);
+  useEffect(()=>{
+    if(typeof categoryId !== "undefined" || typeof subCategoryId !== "undefined"){
+      fetchproductListData();
+    }
+      
+  },[categoryId,subCategoryId]);
   var filter = {
       "categoryId": 0, 
       "subCategoryId": 0,
@@ -24,7 +37,14 @@ export default function ProductList() {
       "offset": 0
     }
   const fetchproductListData = async () => {
-      
+      if(typeof categoryId !== undefined && parseInt(categoryId) > 0) 
+      {
+        filter.categoryId = parseInt(categoryId)
+      }   
+      if(typeof subCategoryId !== undefined && parseInt(subCategoryId) > 0) 
+      {
+        filter.subCategoryId = parseInt(subCategoryId)
+      }   
       
       const result = await api.post('products-list',filter);
       setproductListData(result.data);

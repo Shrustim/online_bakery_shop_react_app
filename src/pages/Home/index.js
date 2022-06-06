@@ -10,32 +10,35 @@ const elment= {
     "id": 1,
     "productName": "White Bread",
     "categoryId": 1,
+    "subCategoryId": 1,
     "description": "Start your day on a nourishing and delightful note with this delicious blend of taste and nutrition White Bread is basically made from wheat flour from which the brand and germ",
     "imageone": "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcSNYt2pdTDIAN1Q8PDQUXBLdQPeAEKjAmT5GCE0X-HzfiEBwZAZ4R2TYZHTHBx0z_tSZSWaJktMCBMOy1q_4PhwkmqA6LBoyARpqpTr1ofqOp4vUA5Oh10IpsA&usqp=CAE",
     "imagetwo": "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcSNYt2pdTDIAN1Q8PDQUXBLdQPeAEKjAmT5GCE0X-HzfiEBwZAZ4R2TYZHTHBx0z_tSZSWaJktMCBMOy1q_4PhwkmqA6LBoyARpqpTr1ofqOp4vUA5Oh10IpsA&usqp=CAE",
     "imagethree": "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcSNYt2pdTDIAN1Q8PDQUXBLdQPeAEKjAmT5GCE0X-HzfiEBwZAZ4R2TYZHTHBx0z_tSZSWaJktMCBMOy1q_4PhwkmqA6LBoyARpqpTr1ofqOp4vUA5Oh10IpsA&usqp=CAE",
     "imagefour": "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcSNYt2pdTDIAN1Q8PDQUXBLdQPeAEKjAmT5GCE0X-HzfiEBwZAZ4R2TYZHTHBx0z_tSZSWaJktMCBMOy1q_4PhwkmqA6LBoyARpqpTr1ofqOp4vUA5Oh10IpsA&usqp=CAE",
     "pricedata": [
-      {
-        "id": 1,
-        "productId": 1,
-        "unitId": 2,
-        "qty": 350,
-        "price": 25,
-        "discount": 0,
-        "totalPrice": 25
-      },
-      {
-        "id": 2,
-        "productId": 1,
-        "unitId": 2,
-        "qty": 700,
-        "price": 50,
-        "discount": 0,
-        "totalPrice": 50
-      }
+        {
+            "id": 1,
+            "productId": 1,
+            "unitId": 2,
+            "qty": 350,
+            "price": 25,
+            "discount": 10,
+            "totalPrice": 22.5,
+            "unitName": "gm"
+        },
+        {
+            "id": 2,
+            "productId": 1,
+            "unitId": 2,
+            "qty": 700,
+            "price": 50,
+            "discount": 0,
+            "totalPrice": 50,
+            "unitName": "gm"
+        }
     ]
-  };
+};
 const Home = () => {
     const [productListOne,setProductListOne] = useState([]);
     const [productListTwo,setProductListTwo] = useState([]);

@@ -32,7 +32,7 @@ export default function ProductDetail() {
       // console.log("productListOne----",result.data);
   }
   return (
-       <div className="site-layout-content">
+       <div className="site-layout-content homePage">
 
     <Row>
                
