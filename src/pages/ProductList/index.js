@@ -44,7 +44,7 @@ export default function ProductList() {
     if(isMobile)  gridcolumn = 2
     if(isSubMobile)  gridcolumn = 2
     
-    if(isMiniMobile)  gridcolumn = 1
+    if(isMiniMobile)  gridcolumn = 2
     function callback(key) {
         console.log(key);
       }
@@ -118,7 +118,7 @@ function onChange(checkedValues) {
     console.log(value); 
   }
   return (
-    <div className="site-layout-content">
+    <div className="site-layout-content homePage">
             <Row>
                
                 <Col  lg={{ span: 5 }} md={{span:5}} >
