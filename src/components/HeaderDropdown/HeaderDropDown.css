@@ -11,8 +11,10 @@
 }
 
 .HeaderDropDown > .seconddiv > img {
-    width: 200px;
-    height: 200px;
+    width: 89%;
+    margin: 10px;
+    border-radius: 14px;
+    height: 174px;
 }
 
 .HeaderDropDownAccount{

@@ -17,11 +17,12 @@ const columns = [
     },
     {
       title: 'Status',
-      key: 'Status',
-      render: (_, { tags }) => (
+      dataIndex: 'status',
+      key: 'status',
+      render: (text) => (
         <>
-           <Tag color={"green"} >
-                IN Process
+           <Tag color={text == "pending" ? "red" : "green"} >
+                {text}
               </Tag>
         </>
       ),

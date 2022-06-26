@@ -1,19 +1,33 @@
 import { Menu } from 'antd';
+import React,{useState,useEffect} from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom';
 import "./HeaderDropDown.css";
 import { useNavigate  } from "react-router-dom";
-import {LOGIN,REGISTER,CHECKOUT,ORDER_LIST,PROFILE} from "../../constants/routes";
+import {LOGIN,REGISTER,CHECKOUT,ORDER_LIST,PROFILE,PRODUCTLIST} from "../../constants/routes";
 import { logout } from '../../redux_store/features/checkIsLoginSlice';
-const HeaderDropDown  = ({categoryId}) => { 
+import api from "../../helpers/axios";
+const HeaderDropDown  = ({categoryId,image}) => { 
+    const [subCategory,setSubCategory] = useState([]);
     const dispatch = useDispatch()
     const navigate = useNavigate();
     const isLogin = useSelector((state) => state.isLogin);
+    console.log("categoryId",categoryId)
     const logoutUser = async() => {
         await dispatch(logout());
         await navigate("/login");
     }
     console.log("categoryId",categoryId);
+    useEffect(() => {
+        getSubCategory();
+    },[categoryId]);
+    const getSubCategory = async() => {
+     if(categoryId !== "0"){
+         const result = await api.get("subcategories?filter=%7B%0A%20%20%22where%22%3A%20%7B%0A%20%20%20%20%20%22categoryId%22%3A%20%22"+categoryId+"%22%2C%0A%20%20%20%20%20%22is_active%22%3A%20%221%22%0A%20%20%7D%2C%0A%20%20%22fields%22%3A%20%7B%0A%20%20%20%20%22id%22%3A%20true%2C%0A%20%20%20%20%22subCategoryName%22%3A%20true%2C%0A%20%20%20%20%22categoryId%22%3A%20true%2C%0A%20%20%20%20%22image%22%3A%20true%2C%0A%20%20%20%20%22description%22%3A%20true%0A%20%20%7D%0A%7D");
+         setSubCategory(result.data);
+         console.log("result",result)
+     }
+    }
     if(categoryId === "0") {
           return(
             <Menu className='HeaderDropDownAccount'>
@@ -57,34 +71,21 @@ const HeaderDropDown  = ({categoryId}) => {
        return(
         <Menu className='HeaderDropDown'>
             <div className='firstdiv'>
-            <Menu.Item>
-                <a target="_blank" rel="noopener noreferrer" href="https://www.antgroup.com">
-                Crackers
-                </a>
-            </Menu.Item>
-
-            <Menu.Item>
-                <a target="_blank" rel="noopener noreferrer" href="https://www.antgroup.com">
-                Hard sweet 
-                </a>
-            </Menu.Item>
-
-            <Menu.Item>
-                <a target="_blank" rel="noopener noreferrer" href="https://www.antgroup.com">
-                Semi-sweet biscuits
-                </a>
-            </Menu.Item>
-
-            <Menu.Item>
-                <a target="_blank" rel="noopener noreferrer" href="https://www.antgroup.com">
-                Short-dough biscuits
-                </a>
-            </Menu.Item>
-        
+            {subCategory.length > 0 ?
+               subCategory.map((elm) => {
+                  return(
+                     <Menu.Item>
+                        <Link to={PRODUCTLIST+"/"+elm.categoryId+"/"+elm.id}  rel="noopener noreferrer" >
+                        {elm.subCategoryName}
+                        </Link>
+                    </Menu.Item>
+                    )
+               }) 
+                : null}
             </div>
             <div className='seconddiv'>
             
-            <img src="https://cdn.shopify.com/s/files/1/0024/1152/8253/products/img-cake-13_300x300_crop_center.jpg?v=1524321891" />
+            <img src={image} />
 
             </div>
             </Menu>

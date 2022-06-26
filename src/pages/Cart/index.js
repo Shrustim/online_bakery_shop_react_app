@@ -5,11 +5,12 @@ import {  faCartShopping} from '@fortawesome/free-solid-svg-icons'
 import ProductCart from "../../components/ProductCart";
 import { useSelector ,useDispatch } from "react-redux";
 import { Link } from 'react-router-dom';
-import {CHECKOUT} from "../../constants/routes";
+import {CHECKOUT,LOGIN} from "../../constants/routes";
 import "./Cart.css";
 export default function Cart() {
    
   const cartData = useSelector((state) => state.cart);
+  const userData = JSON.parse(localStorage.getItem("userData"));
   var getTotalMrp = 0;
   if(cartData.cart.length > 0){
     cartData.cart.map((e) => {
@@ -42,7 +43,7 @@ export default function Cart() {
                           
                            
                       <div>
-                      <Link to={CHECKOUT}>
+                      <Link to={userData ? CHECKOUT : LOGIN}>
                         <Button type="primary" size="small" className='placeorderButton'> <FontAwesomeIcon style={{marginRight:"10px"}} icon={faCartShopping} /> Place Order</Button>
                         </Link>
                       </div>

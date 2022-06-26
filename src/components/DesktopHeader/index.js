@@ -34,7 +34,7 @@ export default function DesktopHeader() {
         category.length > 0 ?
         category.map((elm,index) => {
            return(
-            <Dropdown overlay={<HeaderDropDown categoryId={categoryId}  />} key={elm.id}>
+            <Dropdown overlay={<HeaderDropDown categoryId={categoryId} image={elm.image}  />} key={elm.id}>
       
             <Link to={PRODUCTLIST+"/"+elm.id} className="ant-dropdown-link header-titles" onClick={(e) =>  { setCategoryId(elm.id) }} onMouseOver={(e) =>  { setCategoryId(elm.id) }} >
             {elm.categoryName} 
